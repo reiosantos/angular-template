@@ -1,0 +1,8 @@
+@import '~@angular/material/theming';
+@import './shared';
+
+$san-yellow: mat-palette($mat-yellow, 500);
+$san-error: mat-palette($mat-red, 300);
+
+$yellow: mat-color($san-yellow);
+$error: mat-color($san-error);

@@ -1,0 +1,12 @@
+{
+  "Application_Name": "Angular Template",
+  "Login_Email_Hint": "example: myname@voyagecontrol.com",
+  "Login_Email_Text": "Email",
+  "Login_Title": "Login",
+  "Password_Text": "Password",
+  "Login_Submit_Text": "Take Me In",
+  "Field_Required": "This field is required",
+  "Invalid_Email": "Email does not match the format (name@site.com)",
+  "Dont_Have_Account": "Dont have an account? Create one.",
+  "Forgot_Password": "I Forgot My Password."
+}

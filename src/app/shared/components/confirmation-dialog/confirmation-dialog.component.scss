@@ -1,0 +1,139 @@
+.display-flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+p {
+  font-family: 'DIN Pro', serif;
+  font-size: 16px;
+  margin-top: 40px;
+  padding: 0 50px;
+  text-align: center;
+}
+
+.bold-text {
+  font-weight: bolder;
+}
+
+// Close Button
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.close-button {
+  background-color: white;
+  border: 0;
+  border-radius: 50%;
+  color: gray;
+  height: 29px;
+  margin: 0 24px 0 0;
+  padding: 1.9px;
+  width: 29px;
+}
+
+.close-button:hover,
+:focus {
+  background-color: white;
+  cursor: pointer;
+  outline: 0;
+}
+
+// Action Buttons
+.action-buttons-wrapper {
+  align-items: flex-start;
+  background-color: red;
+  //background: url(../../../assets/images/san-francisco.png) no-repeat;
+  background-position-y: bottom;
+  background-size: 592px 137px;
+  flex-wrap: wrap;
+  height: 136px;
+  margin-top: 30px;
+  padding: 0;
+  width: 100%;
+}
+
+.action-buttons {
+  width: 182px;
+  height: 50px;
+  border: 1px solid rgba(128, 143, 163, .11);
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: none;
+  font-family: Lato, 'DIN Pro', serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 21px;
+  margin: 0 13.5px;
+  padding: 0;
+}
+
+.action-buttons:focus {
+  background-color: darkgreen;
+}
+
+.action-buttons:hover {
+  box-shadow: 0 3px 7px 0 cornflowerblue;
+  cursor: pointer;
+}
+
+.confirm {
+  color: darkgreen;
+}
+
+.cancel {
+  color: indianred;
+}
+
+.arrow-icon-wrapper {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+}
+
+.left-wrapper {
+  background-color: white;
+  margin-right: 15px;
+}
+
+.right-wrapper {
+  background-color: white;
+  margin-left: 15px;
+}
+
+.button-icon-size {
+  height: 10px;
+  width: 10px;
+}
+
+.left {
+  //background: url(../../../assets/icons/left.svg) no-repeat;
+}
+
+.right {
+  //background: url(../../../assets/icons/right.svg) no-repeat;
+}
+
+@media screen and (max-width: 522px) {
+  .arrow-icon-wrapper {
+    display: none;
+  }
+
+  .action-buttons-wrapper {
+    background-position-y: bottom;
+    padding-bottom: 70px;
+  }
+}
+
+@media screen and (max-width: 306px) {
+  p {
+    padding: 0 25px;
+  }
+
+  .action-buttons-wrapper {
+    background-position-y: bottom;
+    padding-bottom: 70px;
+  }
+}

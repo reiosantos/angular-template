@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "name": "SIDE_NAVBAR_homepage",
+      "icon": ["fas", "home"],
+      "iconType": "fa",
+      "link": "welcome",
+      "section": "",
+      "permissions": [],
+      "venueSetting": "CUSTOM_WELCOME_SCREEN",
+      "show": "funcShowRoute",
+      "onlyIf": "",
+      "pages": []
+    }
+  ]
+}

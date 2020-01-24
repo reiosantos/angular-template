@@ -1,0 +1,25 @@
+//*** Navigation bars ***/
+
+//*===== Variables ============================================================*/
+
+//*** Navigation bars ***/
+$topbar-height: 50px;
+$sidebar-width-expanded: 250px;
+$sidebar-width-collapsed: 60px;
+
+//*===== Mixins ===============================================================*/
+
+@mixin highlight-sidebar-item {
+  background-color: $navigation-bar-background-color-selected;
+  box-shadow: inset 0 0 5px 0 $highlight-box-shadow;
+}
+
+@mixin menu-icon($image-url) {
+  padding-left: 45px;
+  background: $image-url 15px center / 24px no-repeat;
+}
+
+@mixin tab-menu-icon($image-url) {
+  padding-left: 35%;
+  background: $image-url 15% center / 30px no-repeat;
+}

@@ -1,0 +1,85 @@
+///*** Media queries
+// ***
+// *** Mixins allowing to write consistent media queries.
+// ***
+// *** IMPORTANT: Use of this should be avoided when possible. Responsiveness is
+// ***            better when size breakpoints are dictated by content rather than
+// ***            some fixed device constaints. Just experiment with each
+// ***            component and find breakpoints at which the display should
+// ***            change. I'm leaving this module only because that code is used
+// ***            in few places, but in the long run that code should be
+// ***            refactored and this module removed. ***/
+
+//* ===== Variables ========================================================== */
+
+//*** Screen sizes breakpoints ***/
+//* Taken from Bootstrap */
+//* Represented dually as map and list to allow certain references to them by
+//   variable values in media queries mixins */
+$screen-names: 'xs' 'sm' 'md' 'lg'; //* Must be ordered increasingly */
+$screen-min-sizes: (
+  'xs': 0,
+  'sm': 768px,
+  'md': 992px,
+  'lg': 1200px
+);
+
+//* ===== Helper function ==================================================== */
+
+//* Given screen name returns the max size of that screen or null if given the
+//   largest screen name (largest screen has only minimum width) */
+@function screen-max-size($screen-name) {
+  $this-name-index: index($screen-names, $screen-name);
+
+  @if $this-name-index == length($screen-names) {
+    @return null;
+  }
+
+  $next-name: nth($screen-names, $this-name-index + 1);
+  //* Return next screen size - 1px */
+  @return map-get($screen-min-sizes, $next-name) - 1px;
+}
+
+//* ===== Mixins ============================================================= */
+
+//* Styles applicable for screens of size at least as specified (or bigger) */
+@mixin screen-size-min($screen-name) {
+  @media (min-width: map-get($screen-min-sizes, $screen-name)) {
+    @content;
+  }
+}
+
+//* Styles applicable for screens of size at most as specified (or smaller) */
+@mixin screen-size-max($screen-name) {
+  $max-size: screen-max-size($screen-name);
+
+  //* If given the largest screen size, output the styles without media query */
+  @if $max-size == null {
+    @content;
+  }
+  @else {
+    @media (max-width: $max-size) {
+      @content;
+    }
+  }
+}
+
+///* Styles applicable only for screens of specified size (nor bigger nor smaller
+//   screens get this styles) */
+@mixin screen-size-only($screen-name) {
+  $min-size: map-get($screen-min-sizes, $screen-name);
+  $max-size: screen-max-size($screen-name);
+
+  ///* If given the largest screen size, output the styles without max-width
+  // limit in the query */
+  @if $max-size == null {
+    @media (min-width: $min-size) {
+      @content;
+    }
+  }
+  @else {
+    @media (min-width: $min-size) and (max-width: $max-size) {
+      @content;
+    }
+  }
+}

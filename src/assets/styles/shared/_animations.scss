@@ -1,0 +1,11 @@
+///*** Animations and transitions
+// ***
+// *** Provide constant animation looks throught the app.
+// ***
+// *** As Compass offers a lot of mixins for creating animations and transitions
+// *** there should be no need to write custom ones. Just setup Compass settings
+// *** by setting it's variables values. ***/
+
+///* Compass settings */
+$default-transition-duration: .3s;
+$default-transition-function: ease;

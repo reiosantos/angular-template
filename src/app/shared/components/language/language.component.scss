@@ -1,0 +1,11 @@
+// language css
+
+::ng-deep {
+  .mat-select-panel {
+    background-color: #fff;
+
+    .mat-option {
+      color: black;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<mat-select
+  [(value)]="selected"
+  (selectionChange)="onSelection($event)"
+  placeholder="----------------------"
+  panelClass="mat-select-panel"
+>
+  <mat-option *ngFor="let lang of langs" [value]="lang.val">{{ lang.label }}</mat-option>
+</mat-select>

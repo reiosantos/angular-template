@@ -1,0 +1,11 @@
+/*** Shared configuration
+ ***
+ *** All the variables, mixins and placeholders that are used throught all
+ *** stylesheets. ***/
+@import 'shared/animations';
+@import 'shared/colors';
+@import 'shared/images';
+@import 'shared/layout';
+@import 'shared/media';
+@import 'shared/navigation';
+@import 'shared/typography';

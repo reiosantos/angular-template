@@ -7,20 +7,38 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "noUnusedParameters": false,
+    "strictNullChecks": false,
+    "noImplicitReturns": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "importHelpers": true,
     "target": "es2015",
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@san/*": [
+        "src/app/*",
+        "src/environments/*"
+      ]
+    },
+    "resolveJsonModule": true
   },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "enableIvy": true
   }
 }

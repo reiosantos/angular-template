@@ -1,0 +1,18 @@
+//*** Images ***/
+
+//*===== Variables and functions ==============================================*/
+
+//* Directory with the images */
+$images-dir: '/dashboard/assets/images/';
+
+//* Function to easily create a URL of an image */
+@function image-url($path) {
+  @return url($images-dir + $path);
+}
+
+//*===== Images URLS ==========================================================*/
+
+//*** Voyage Control logo ***/
+$logo-white: image-url('logo-white.png');
+
+//*** Icons ***/
