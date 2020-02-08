@@ -6,7 +6,7 @@
     "**/vendor/**/*.scss"
   ],
   "rules": {
-    "color-hex-case": "lower",
+    "color-hex-case": "upper",
     "color-no-invalid-hex": true,
     "function-calc-no-unspaced-operator": true,
     "function-comma-space-after": "always-single-line",
@@ -90,7 +90,7 @@
       true,
       {"ignoreTypes": ["/[a-z].+]/", "/[a-z]-[a-z]/"], "severity": "error"}
     ],
-    "selector-max-id": 0,
+    "selector-max-id": 1,
     "no-missing-end-of-source-newline": true,
     "no-eol-whitespace": true,
     "max-line-length": 100,

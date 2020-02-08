@@ -13,9 +13,9 @@
 $fontConfig: (
   display-4: mat-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
   display-3: mat-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
-  display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
+  display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0),
   display-1: mat-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
-  headline: mat-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
+  headline: mat-typography-level(24px, 32px, 400, 'Roboto', 0),
   title: mat-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
   subheading-2: mat-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
   subheading-1: mat-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
@@ -56,7 +56,7 @@ $mat-light-theme-foreground: (
 );
 
 // Dark Theme text
-$light-text: #ffffff;
+$light-text: #FFF;
 $light-primary-text: $light-text;
 $light-accent-text: rgba($light-primary-text, 0.7);
 $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -84,14 +84,14 @@ $mat-dark-theme-foreground: (
 
 // Background config
 // Light bg
-$light-background:    #fafafa;
+$light-background:    #FAFAFA;
 $light-bg-darker-5:   darken($light-background, 5%);
 $light-bg-darker-10:  darken($light-background, 10%);
 $light-bg-darker-20:  darken($light-background, 20%);
 $light-bg-darker-30:  darken($light-background, 30%);
 $light-bg-lighter-5:  lighten($light-background, 5%);
-$dark-bg-alpha-4:     rgba(#2c2c2c, 0.04);
-$dark-bg-alpha-12:    rgba(#2c2c2c, 0.12);
+$dark-bg-alpha-4:     rgba(#2C2C2C, 0.04);
+$dark-bg-alpha-12:    rgba(#2C2C2C, 0.12);
 
 $mat-light-theme-background: (
   background:               $light-background,
@@ -111,13 +111,13 @@ $mat-light-theme-background: (
 );
 
 // Dark bg
-$dark-background:     #2c2c2c;
+$dark-background:     #2C2C2C;
 $dark-bg-lighter-5:   lighten($dark-background, 5%);
 $dark-bg-lighter-10:  lighten($dark-background, 10%);
 $dark-bg-lighter-20:  lighten($dark-background, 20%);
 $dark-bg-lighter-30:  lighten($dark-background, 30%);
-$light-bg-alpha-4:    rgba(#fafafa, 0.04);
-$light-bg-alpha-12:   rgba(#fafafa, 0.12);
+$light-bg-alpha-4:    rgba(#FAFAFA, 0.04);
+$light-bg-alpha-12:   rgba(#FAFAFA, 0.12);
 
 // Background palette for dark themes.
 $mat-dark-theme-background: (
@@ -142,20 +142,11 @@ $mat-dark-theme-background: (
 
 // Theme Config
 
-body {
-  --primary-color: #33682d;
-  --primary-lighter-color: #c2d2c0;
-  --primary-darker-color: #204b1c;
-  --text-primary-color: #{$light-primary-text};
-  --text-primary-lighter-color: #{$dark-primary-text};
-  --text-primary-darker-color: #{$light-primary-text};
-}
-
 $mat-primary: (
-  main: #33682d,
-  lighter: #c2d2c0,
-  darker: #204b1c,
-  200: #33682d, // For slide toggle,
+  main: #33682D,
+  lighter: #C2D2C0,
+  darker: #204B1C,
+  200: #33682D, // For slide toggle,
   contrast : (
     main: $light-primary-text,
     lighter: $dark-primary-text,
@@ -164,20 +155,11 @@ $mat-primary: (
 );
 $theme-primary: mat-palette($mat-primary, main, lighter, darker);
 
-body {
-  --accent-color: #bec0be;
-  --accent-lighter-color: #ececec;
-  --accent-darker-color: #a7aaa7;
-  --text-accent-color: #{$dark-primary-text};
-  --text-accent-lighter-color: #{$dark-primary-text};
-  --text-accent-darker-color: #{$dark-primary-text};
-}
-
 $mat-accent: (
-  main: #bec0be,
-  lighter: #ececec,
-  darker: #a7aaa7,
-  200: #bec0be, // For slide toggle,
+  main: #BEC0BE,
+  lighter: #ECECEC,
+  darker: #A7AAA7,
+  200: #BEC0BE, // For slide toggle,
   contrast : (
     main: $dark-primary-text,
     lighter: $dark-primary-text,
@@ -186,30 +168,42 @@ $mat-accent: (
 );
 $theme-accent: mat-palette($mat-accent, main, lighter, darker);
 
-body {
-  --warn-color: #c02424;
-  --warn-lighter-color: #ecbdbd;
-  --warn-darker-color: #aa1616;
-  --text-warn-color: #{$light-primary-text};
-  --text-warn-lighter-color: #{$dark-primary-text};
-  --text-warn-darker-color: #{$light-primary-text};
-}
-
 $mat-warn: (
-  main: #c02424,
-  lighter: #ecbdbd,
-  darker: #aa1616,
-  200: #c02424, // For slide toggle,
+  main: #C02424,
+  lighter: #ECBDBD,
+  darker: #AA1616,
+  200: #C02424, // For slide toggle,
   contrast : (
     main: $light-primary-text,
     lighter: $dark-primary-text,
     darker: $light-primary-text,
   )
 );
-$theme-warn: mat-palette($mat-warn, main, lighter, darker);;
+$theme-warn: mat-palette($mat-warn, main, lighter, darker);
 
 $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
+
+body {
+  --primary-color: #33682D;
+  --primary-lighter-color: #C2D2C0;
+  --primary-darker-color: #204B1C;
+  --text-primary-color: #{$light-primary-text};
+  --text-primary-lighter-color: #{$dark-primary-text};
+  --text-primary-darker-color: #{$light-primary-text};
+  --accent-color: #BEC0BE;
+  --accent-lighter-color: #ECECEC;
+  --accent-darker-color: #A7AAA7;
+  --text-accent-color: #{$dark-primary-text};
+  --text-accent-lighter-color: #{$dark-primary-text};
+  --text-accent-darker-color: #{$dark-primary-text};
+  --warn-color: #C02424;
+  --warn-lighter-color: #ECBDBD;
+  --warn-darker-color: #AA1616;
+  --text-warn-color: #{$light-primary-text};
+  --text-warn-lighter-color: #{$dark-primary-text};
+  --text-warn-darker-color: #{$light-primary-text};
+}
 
 // Theme Init
 @include angular-material-theme($theme);
@@ -218,22 +212,19 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   @include angular-material-theme($altTheme);
 }
 
-
 // Specific component overrides, pieces that are not in line with the general theming
 
 // Handle buttons appropriately, with respect to line-height
-.mat-raised-button, .mat-stroked-button, .mat-flat-button {
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button {
   padding: 0 1.15em;
-  margin: 0 .65em;
+  margin: 0 0.65em;
   min-width: 3em;
-  line-height: 36.4px
+  line-height: 36.4px;
 }
 
 .mat-standard-chip {
-  padding: .5em .85em;
+  padding: 0.5em 0.85em;
   min-height: 2.5em;
 }
-
-$primary: mat-color($theme-primary);
-$accent:  mat-color($theme-accent);
-$warn: mat-color($theme-warn);

@@ -43,15 +43,13 @@
             ],
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/theme"
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/theme",
                 "src/assets"
               ]
             },
@@ -167,16 +165,14 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/theme"
+              "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/assets"
+              "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/theme"
+                "src/assets"
               ]
             },
             "scripts": []

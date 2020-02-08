@@ -1,2 +1,12 @@
-@import "styles/variables";
 @import "theme-dark-blue";
+
+// theme dependent variables
+$primary: mat-color($theme-primary);
+$accent: mat-color($theme-accent);
+$warn: mat-color($theme-warn);
+
+$san-yellow: mat-palette($mat-yellow, 500);
+$san-error: mat-palette($mat-red, 300);
+
+$yellow: mat-color($san-yellow);
+$error: mat-color($san-error);

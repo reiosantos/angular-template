@@ -1,11 +1,15 @@
-//*** Other variables/mixins that don't belong to any particular category ***/
+@import '../theme/theme';
+@import './colors';
 
-//* Border radius */
-$border-radius: 4px;
+.mt-auto {
+  margin-top: auto;
+}
 
-//* Panel element */
-$panel-padding-vertical: 30px;
-$panel-padding-horizontal: 30px;
+.display-unset {
+  display: unset;
+}
 
-//* Data list module */
-$data-list-bottom-margin: 15px;
+.submit-button:not([disabled]) {
+  color: $white !important;
+  background-color: $primary !important;
+}
