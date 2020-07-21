@@ -17,7 +17,6 @@ export class LanguageComponent implements OnInit {
 
   ngOnInit() {
     this.langs = this.vcConfig.availableLanguages;
-    console.log(this.vcConfig);
     this.selected = this.translate.currentLang;
   }
 

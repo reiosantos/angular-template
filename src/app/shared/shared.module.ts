@@ -10,9 +10,19 @@ import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '@san/shared/components/loader/loader.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToolbarComponent } from '@san/shared/components/toolbar/toolbar.component';
+import { SidebarComponent } from '@san/shared/components/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [ConfirmModalComponent, IconComponent, LanguageComponent, ErrorControlDirective, LoaderComponent],
+  declarations: [
+    ConfirmModalComponent,
+    IconComponent,
+    LanguageComponent,
+    ErrorControlDirective,
+    LoaderComponent,
+    ToolbarComponent,
+    SidebarComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

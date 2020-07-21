@@ -2,9 +2,9 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChi
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
-import * as mainRoutes from '../main-routes.json';
+import * as mainRoutes from '@san/routes.json';
 import { Route } from '@san/shared/models/route';
-import { ToolbarComponent } from '@san/modules/main/toolbar/toolbar.component';
+import { ToolbarComponent } from '@san/shared/components/toolbar/toolbar.component';
 import { Config } from '@san/shared/interfaces/config';
 import { NavMenu } from '@san/shared/interfaces/nav-menu';
 import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
