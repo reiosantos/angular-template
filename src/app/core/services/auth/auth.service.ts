@@ -11,6 +11,6 @@ export class AuthService extends Auth {
   }
 
   login = (username: string, password: string): Observable<any> => {
-    return this.httpClient.post(Urls.getLoginUrl(), { username, password });
+    return this.httpClient.post(Urls.getLoginUrl(), { email: username, password });
   };
 }

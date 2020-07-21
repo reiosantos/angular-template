@@ -16,7 +16,7 @@ export class AuthStoreEffects {
     this.actions$.pipe(
       ofType<authActions.AuthAction>(authActions.AuthActionTypes.LOGIN_REQUEST),
       switchMap(action =>
-        this.auth.login(action.payload.email, action.payload.password).pipe(
+        this.auth.login(action.payload.username, action.payload.password).pipe(
           map(user => {
             this.authToken.setToken(user.token);
             this.storage.set(Strings.AUTH_USER_KEY, user);
