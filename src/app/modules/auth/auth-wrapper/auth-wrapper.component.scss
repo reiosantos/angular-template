@@ -1,0 +1,60 @@
+@import 'styles/variables';
+
+.mat-toolbar {
+  font-size: $font-size-primary;
+  position: fixed;
+
+  .vc-logo {
+    background: {
+      image: $logo-white;
+      position: left;
+      repeat: no-repeat;
+      size: 150px;
+    }
+    height: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+}
+
+.mat-card-login {
+  background-color: $primary;
+  min-height: 100vh !important;
+
+  span {
+    &.mat-display-2,
+    &.mat-title {
+      color: $white;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  .language {
+    margin: 0 auto 2em;
+    width: 90%;
+    border: 1px solid $white;
+    padding: 0.5em;
+    border-radius: 5px;
+  }
+
+  .forgot-password {
+    color: $white;
+    margin: 1em auto 2em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .vc-logo {
+    background: {
+      image: $logo-white;
+      position: center;
+      repeat: no-repeat;
+      size: 300px;
+    }
+    height: 6em;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+}

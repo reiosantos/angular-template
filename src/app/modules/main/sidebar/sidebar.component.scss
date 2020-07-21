@@ -2,19 +2,18 @@
 
 mat-sidenav-container,
 mat-sidenav {
-  height: 100%;
+  height: 100vh;
 }
 
 mat-sidenav {
-  background-color: $primary;
-  color: white;
+  background-color: $primary !important;
+  color: $white;
   width: 270px;
-  display: flex;
-  flex-direction: column;
 
   * {
     background-color: $primary;
-    color: white;
+    color: $white !important;
+    font-weight: lighter;
   }
 }
 
@@ -32,7 +31,7 @@ mat-toolbar {
 mat-expansion-panel,
 mat-expansion-panel-header {
   margin: 0 auto;
-  padding: 0 auto;
+  padding: 0;
 }
 
 .mat-expansion-panel-header {
@@ -73,10 +72,10 @@ a:hover {
 }
 
 mat-sidenav-content {
-  background: white;
+  background: $white;
 
   > .mat-sidenav-content-div {
-    background-color: white;
+    background-color: $white;
     box-sizing: border-box;
     padding: 1em 3em 0;
   }
@@ -97,8 +96,8 @@ mat-icon {
   }
 
   &.logout-icon {
-    color: #ff5359;
-    margin: 0 .5em;
+    color: $warn;
+    margin: 0 0.5em;
   }
 }
 
@@ -107,7 +106,7 @@ mat-icon {
   margin: 0 .3em 0 1em;
 }
 
-san-icon {
+vc-icon {
   margin-left: 1em;
 }
 
@@ -120,8 +119,4 @@ san-icon {
   }
   height: 100%;
   width: 100%;
-}
-
-.mat-drawer {
-  background-color: $primary;
 }

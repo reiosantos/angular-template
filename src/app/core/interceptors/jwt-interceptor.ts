@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SanAuthToken } from '@san/shared/interfaces/san-auth-token';
+import { AuthToken } from '@san/shared/interfaces/auth-token';
 
 /**
  * @ngdoc service
@@ -12,11 +12,9 @@ import { SanAuthToken } from '@san/shared/interfaces/san-auth-token';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authToken: SanAuthToken) {
-  }
+  constructor(private authToken: AuthToken) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     const reqClone = req.clone({});
 
     const doNotSendTokenToThisUrls = ['/api/jwt/verify/', '/api/jwt/getLoginUrl/'];

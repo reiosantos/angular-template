@@ -1,0 +1,8 @@
+<ng-content *ngIf="!(isLoading | async); else spinner"></ng-content>
+
+<ng-template #spinner>
+  <!-- YOUR ANIMATION / SPINNER HERE -->
+  <div fxLayout="row" fxLayoutAlign="center center" class="loader">
+    <mat-spinner [mode]="mode" [strokeWidth]="strokeWidth"></mat-spinner>
+  </div>
+</ng-template>

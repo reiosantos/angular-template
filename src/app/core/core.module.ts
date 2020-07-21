@@ -1,36 +1,47 @@
 import { CommonModule } from '@angular/common';
-import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { LoggerService } from '@san/core/logger/logger.service';
 import { LoggerPublisherService } from '@san/core/logger/logger-publisher.service';
-import { NavMenuService } from '@san/core/services/nav-menu/nav-menu.service';
-import { AlertService } from '@san/core/services/alert/alert.service';
+import { AlertService } from '@san/core/providers/alert/alert.service';
 import { AuthService } from '@san/core/services/auth/auth.service';
 import { getErrorHandler } from '@san/core/logger/sentry-logger.service';
 import { HttpWrapperService } from '@san/core/http/http-wrapper.service';
-import { ErrorStateMatcher } from '@angular/material';
-import { SanErrorStateMatcher } from '@san/core/providers/san-error-state-matcher';
-import { SanAuth } from '@san/shared/interfaces/san-auth';
-import { SanAuthToken } from '@san/shared/interfaces/san-auth-token';
-import { SanLogger, SanLoggerPublisher } from '@san/shared/interfaces/san-logger-publisher';
-import { SanAuthTokenService } from '@san/core/services/auth-token/san-auth-token.service';
-import { SanHttpClient } from '@san/shared/interfaces/san-http-client';
-import { SanNavMenu } from '@san/shared/interfaces/san-nav-menu';
-import { SanMonitor } from '@san/shared/interfaces/san-monitor';
+import { ErrorStateMatcher } from '@san/core/providers/error-state-matcher';
+import { Auth } from '@san/shared/interfaces/auth';
+import { AuthToken } from '@san/shared/interfaces/auth-token';
+import { Logger, LoggerPublisher } from '@san/shared/interfaces/logger-publisher';
+import { HttpClient } from '@san/shared/interfaces/http-client';
+import { NavMenu } from '@san/shared/interfaces/nav-menu';
+import { Monitor } from '@san/shared/interfaces/monitor';
 import { MonitoringService } from '@san/core/logger/monitoring.service';
-import { SanAlert } from '@san/shared/interfaces/san-alert';
+import { Alert } from '@san/shared/interfaces/alert';
+import { ErrorStateMatcher as XErrorStateMatcher } from '@angular/material/core';
+import { Config } from '@san/shared/interfaces/config';
+import { AppConfigService } from '@san/configs/app-config.service';
+import { UrlComponentService } from '@san/configs/url-component/url-component.service';
+import { UrlComponent } from '@san/shared/interfaces/url-component';
+import { Storage } from '@san/shared/interfaces/storage';
+import { StorageService } from '@san/core/providers/storage/storage.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { configFactory } from '@san/core/providers/app.factories';
+import { JwtInterceptor } from '@san/core/interceptors/jwt-interceptor';
+import { VenueInterceptor } from '@san/core/interceptors/venue-interceptor';
+import { LoaderInterceptor } from '@san/core/interceptors/loader-interceptor';
+import { AuthTokenService } from '@san/core/providers/auth-token/auth-token.service';
+import { NavMenuService } from '@san/core/providers/nav-menu/nav-menu.service';
+import { SanStoreModule } from '@san/store';
+import { UserService } from '@san/core/services/user/user.service';
+import { UserI } from '@san/shared/interfaces/services/user-i';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-  ],
-  exports: []
+  imports: [CommonModule, SanStoreModule, HttpClientModule],
+  exports: [SanStoreModule]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
-      throw new Error(
-        'CoreModule is already loaded. Import it in the AppModule only');
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
     }
   }
 
@@ -38,16 +49,25 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        { provide: ErrorStateMatcher, useClass: SanErrorStateMatcher },
+        { provide: XErrorStateMatcher, useClass: ErrorStateMatcher },
         { provide: ErrorHandler, useFactory: getErrorHandler },
-        { provide: SanAuth, useClass: AuthService },
-        { provide: SanAuthToken, useClass: SanAuthTokenService },
-        { provide: SanLogger, useClass: LoggerService },
-        { provide: SanLoggerPublisher, useClass: LoggerPublisherService },
-        { provide: SanHttpClient, useClass: HttpWrapperService },
-        { provide: SanNavMenu, useClass: NavMenuService },
-        { provide: SanMonitor, useClass: MonitoringService },
-        { provide: SanAlert, useClass: AlertService }
+        { provide: Config, useClass: AppConfigService },
+        { provide: UrlComponent, useClass: UrlComponentService },
+        { provide: Auth, useClass: AuthService },
+        { provide: Storage, useClass: StorageService },
+        { provide: AuthToken, useClass: AuthTokenService },
+        { provide: Logger, useClass: LoggerService },
+        { provide: LoggerPublisher, useClass: LoggerPublisherService },
+        { provide: HttpClient, useClass: HttpWrapperService },
+        { provide: NavMenu, useClass: NavMenuService },
+        { provide: Monitor, useClass: MonitoringService },
+        { provide: Alert, useClass: AlertService },
+        { provide: UserI, useClass: UserService },
+
+        { provide: APP_INITIALIZER, useFactory: configFactory, deps: [Config], multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: VenueInterceptor, multi: true }
       ]
     };
   }

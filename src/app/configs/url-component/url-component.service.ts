@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { environment } from '@san/environment';
-import { SanUrlComponent } from '@san/shared/interfaces/san-url-component';
-import { WINDOW } from '@san/core/providers/san-injetion-tokens';
+import { UrlComponent } from '@san/shared/interfaces/url-component';
+import { WINDOW } from '@san/core/providers/injetion-tokens';
 
 @Injectable()
-export class UrlComponentService extends SanUrlComponent {
+export class UrlComponentService extends UrlComponent {
   private hostname: string;
   private pathname: string;
   private href: string;
@@ -19,7 +19,7 @@ export class UrlComponentService extends SanUrlComponent {
   /**
    * Whether or not the current domain (host) indicates that we should use the last part of the URL
    * path to determine the venue.
-   * @returns boolean
+   * @returns {boolean} if should check for venue
    */
   private shouldUseSuffix = (): boolean => {
     // Domains from which to check for the venue from last part of URL path
@@ -34,7 +34,7 @@ export class UrlComponentService extends SanUrlComponent {
 
   /**
    * Venue URL-component, read from dev-deployed URL.
-   * @returns The last part of the current URL.
+   * @returns {string} The last part of the current URL.
    */
   private urlComponentFromSuffix = (): string => {
     const urlParts = this.pathname.split('/');
@@ -43,7 +43,7 @@ export class UrlComponentService extends SanUrlComponent {
 
   /**
    * Venue URL-component, read from production-deployed domain.
-   * @returns string, Subdomain of the current domain (host).
+   * @returns {string}, Subdomain of the current domain (host).
    */
   private urlComponentFromProduction = (): string => {
     const domainParts = this.hostname.split('.');
@@ -63,11 +63,7 @@ export class UrlComponentService extends SanUrlComponent {
   };
 
   isStaging = (): boolean => {
-    return !!(
-      this.href.startsWith('https://') && (
-        this.hostname.startsWith('stg') || this.hostname.startsWith('dev')
-      )
-    );
+    return !!(this.href.startsWith('https://') && (this.hostname.startsWith('stg') || this.hostname.startsWith('dev')));
   };
 
   isUat = (): boolean => {
@@ -80,5 +76,5 @@ export class UrlComponentService extends SanUrlComponent {
 
   isProd = (): boolean => {
     throw new Error('Method not implemented.');
-  }
+  };
 }

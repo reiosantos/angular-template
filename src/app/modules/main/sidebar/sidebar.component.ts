@@ -1,20 +1,13 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { MatDrawerToggleResult, MatSidenav } from '@angular/material';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as mainRoutes from '../main-routes.json';
-import { SanRoute } from '@san/shared/models/san-route';
+import { Route } from '@san/shared/models/route';
 import { ToolbarComponent } from '@san/modules/main/toolbar/toolbar.component';
-import { SanConfig } from '@san/shared/interfaces/san-config';
-import { SanNavMenu } from '@san/shared/interfaces/san-nav-menu';
+import { Config } from '@san/shared/interfaces/config';
+import { NavMenu } from '@san/shared/interfaces/nav-menu';
+import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'san-sidebar',
@@ -22,27 +15,26 @@ import { SanNavMenu } from '@san/shared/interfaces/san-nav-menu';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
-
   position: 'over' | 'push' | 'side' = 'side';
   watcher: Subscription;
   activeRoute = '';
   loading = false;
-  routes: SanRoute[] = mainRoutes.routes as SanRoute[];
+  routes: Route[] = mainRoutes.routes as Route[];
   value = 0;
 
   @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
   @ViewChild(ToolbarComponent, { static: false }) header: ToolbarComponent;
 
   constructor(
-    private sanConfig: SanConfig,
-    private sanNavMenu: SanNavMenu,
+    private config: Config,
+    private navMenu: NavMenu,
     private media: MediaObserver,
     private router: Router,
-    private cd: ChangeDetectorRef,
-  ) {
-  }
+    private cd: ChangeDetectorRef
+  ) {}
 
   responsiveLogout = () => {
+    // TODO: call logout model
     // Logout modal
   };
 
@@ -55,7 +47,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.sanNavMenu.setSidenav(this.sidenav);
+    this.navMenu.setSidenav(this.sidenav);
     this.createMediaWatcher();
   }
 
@@ -67,13 +59,13 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   createMediaWatcher = () => {
     this.watcher = this.media.asObservable().subscribe((changes: MediaChange[]) => {
-      changes.map((change) => {
+      changes.map(change => {
         if (change.mqAlias === 'sm' || change.mqAlias === 'xs') {
-          this.sanNavMenu.close().then(() => {
+          this.navMenu.close().then(() => {
             this.position = 'over';
           });
         } else {
-          this.sanNavMenu.open().then(() => {
+          this.navMenu.open().then(() => {
             this.position = 'side';
           });
         }
@@ -83,9 +75,9 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   };
 
-  menuClicked = (shouldCloseWhenClicked: boolean): Promise<MatDrawerToggleResult>|null => {
+  menuClicked = (shouldCloseWhenClicked: boolean): Promise<MatDrawerToggleResult> | null => {
     if (this.position === 'over' && shouldCloseWhenClicked) {
-      return this.sanNavMenu.close();
+      return this.navMenu.close();
     }
     return null;
   };
@@ -103,22 +95,13 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   };
 
-  funcGetBookEventLink = (): string => {
-    return !!+this.sanConfig.venueSettings.ENTERPRISE_VENUE
-      ? 'booking-create.venue-select'
-      : 'booking-create.event-select';
-  };
-
-  funcShowRoute = (
-    section: string = '', venueSetting: string = '', permissions: [] = [],
-    onlyIf: string = ''
-  ): boolean => {
+  funcShowRoute = (section = '', venueSetting = '', permissions: [] = [], onlyIf = ''): boolean => {
     // TODO: check for relevant settings if this route should be displayed to the currently
     //  logged in user
     return false;
   };
 
-  getIconStyle = (isLinkActive: boolean = false): any => {
+  getIconStyle = (isLinkActive = false): any => {
     if (isLinkActive) {
       return { color: 'yellow' };
     }

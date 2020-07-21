@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { SanLoggerPublisher } from '@san/shared/interfaces/san-logger-publisher';
-import { SanLoggerFactory, SanLoggerType } from '@san/shared/interfaces/san-logger-factory';
+import { LoggerPublisher } from '@san/shared/interfaces/logger-publisher';
+import { LoggerFactory, LoggerType } from '@san/shared/interfaces/logger-factory';
 
 @Injectable()
-export class LoggerPublisherService extends SanLoggerPublisher {
-  publishers: SanLoggerType[] = [];
+export class LoggerPublisherService extends LoggerPublisher {
+  publishers: LoggerType[] = [];
 
   constructor() {
     super();
     this.buildPublishers();
   }
 
-  addPublisher = (publisher: SanLoggerType) => {
+  addPublisher = (publisher: LoggerType) => {
     this.publishers.push(publisher);
   };
 
   buildPublishers = () => {
     // add console publisher to array
-    this.publishers.push(SanLoggerFactory.getLogger('console'));
-  }
+    this.publishers.push(LoggerFactory.getLogger('console'));
+  };
 }

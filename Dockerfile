@@ -17,7 +17,7 @@ COPY . $APP_PATH
 
 RUN rm -rf node_modules
 
-RUN npm i -g @angular/cli@8.3.23 && \
+RUN npm i -g @angular/cli@9.1.11 && \
     npm i && \
     npm cache clean --force && \
     npm run build:$environment

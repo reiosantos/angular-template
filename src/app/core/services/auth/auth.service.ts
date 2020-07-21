@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SanAuth } from '@san/shared/interfaces/san-auth';
-import { SanHttpClient } from '@san/shared/interfaces/san-http-client';
-import { SanUrls } from '@san/core/providers/san-urls';
+import { Auth } from '@san/shared/interfaces/auth';
+import { HttpClient } from '@san/shared/interfaces/http-client';
+import { Urls } from '@san/core/providers/urls';
 
 @Injectable()
-export class AuthService extends SanAuth {
-  constructor(private sanHttpClient: SanHttpClient) {
+export class AuthService extends Auth {
+  constructor(private httpClient: HttpClient) {
     super();
   }
 
   login = (username: string, password: string): Observable<any> => {
-    return this.sanHttpClient.post(SanUrls.getLoginUrl(), { username, password });
+    return this.httpClient.post(Urls.getLoginUrl(), { username, password });
   };
 }

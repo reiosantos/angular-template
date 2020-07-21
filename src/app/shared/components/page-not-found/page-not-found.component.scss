@@ -1,4 +1,4 @@
-@import "src/theme/theme";
+@import 'styles/variables';
 
 .container {
   background: {
@@ -8,8 +8,8 @@
     repeat: no-repeat;
     size: cover;
   }
-  color: white;
-  height: 100%;
+  color: $white;
+  height: 100vh;
   text-align: center;
 }
 
@@ -50,14 +50,14 @@
   h3 {
     font-size: 26px;
     font-weight: 300;
-    letter-spacing: -.94px;
+    letter-spacing: -0.94px;
     line-height: 33px;
   }
 
   p {
     font-size: 16px;
     font-weight: 300;
-    letter-spacing: -.58px;
+    letter-spacing: -0.58px;
     line-height: 21px;
   }
 }

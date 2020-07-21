@@ -1,11 +1,28 @@
 // language css
+@import 'styles/variables';
 
 ::ng-deep {
-  .mat-select-panel {
-    background-color: #fff;
+  * {
+    font-size: $font-size-primary;
+  }
 
-    .mat-option {
-      color: black;
+  .language {
+    margin: auto;
+    border: 1px solid $white;
+    padding: 0 1em;
+    border-radius: 5px;
+    min-width: 10em;
+
+    .mat-select-panel {
+      background-color: $white;
+
+      .mat-option {
+        color: black;
+      }
+    }
+
+    .mat-select-value-text {
+      color: white;
     }
   }
 }

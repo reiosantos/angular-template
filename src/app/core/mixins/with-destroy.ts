@@ -3,7 +3,7 @@ import { OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
 // tslint:disable-next-line:variable-name
-export function withDestroy<T extends Constructor<{}>>(Base: T = (class {} as any)) {
+export function withDestroy<T extends Constructor<Record<string, unknown>>>(Base: T = class {} as any) {
   return class extends Base implements OnDestroy {
     destroy$: Subject<void> = new Subject<void>();
 

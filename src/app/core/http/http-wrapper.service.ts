@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient as AHttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SanHttpClient } from '@san/shared/interfaces/san-http-client';
+import { HttpClient } from '@san/shared/interfaces/http-client';
 
 @Injectable()
-export class HttpWrapperService extends SanHttpClient {
+export class HttpWrapperService extends HttpClient {
   private readonly options: {
-    headers?: HttpHeaders | { [header: string]: string | string[]; };
+    headers?: HttpHeaders | { [header: string]: string | string[] };
     observe?: 'body';
-    params?: HttpParams | { [param: string]: string | string[]; };
+    params?: HttpParams | { [param: string]: string | string[] };
     reportProgress?: boolean;
     responseType?: 'json';
     withCredentials?: boolean;
   };
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: AHttpClient) {
     super();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -24,28 +24,36 @@ export class HttpWrapperService extends SanHttpClient {
     this.options = {
       headers,
       reportProgress: true,
-      withCredentials: true,
+      withCredentials: false,
       params: {}
     };
   }
 
-  post = (endpoint: string, data: any = {}, params: any = {}): Observable<any> => {
-    return this.httpClient.post(endpoint, data, { ...this.options, params });
+  prepareOptions = (showLoader: boolean) => {
+    let { headers } = this.options;
+    // @ts-ignore
+    headers = headers.append('Show-Loader', showLoader.toString());
+
+    return { ...this.options, headers };
   };
 
-  put = (endpoint: string, data: any = {}, params: any = {}): Observable<any> => {
-    return this.httpClient.put(endpoint, data, { ...this.options, params });
+  post = (endpoint: string, data: any = {}, params: any = {}, showLoader = true): Observable<any> => {
+    return this.httpClient.post(endpoint, data, { ...this.prepareOptions(showLoader), params });
   };
 
-  patch = (endpoint: string, data: any = {}, params: any = {}): Observable<any> => {
-    return this.httpClient.patch(endpoint, data, { ...this.options, params });
+  put = (endpoint: string, data: any = {}, params: any = {}, showLoader = true): Observable<any> => {
+    return this.httpClient.put(endpoint, data, { ...this.prepareOptions(showLoader), params });
   };
 
-  delete = (endpoint: string, params: any = {}): Observable<any> => {
-    return this.httpClient.delete(endpoint, { ...this.options, params });
+  patch = (endpoint: string, data: any = {}, params: any = {}, showLoader = true): Observable<any> => {
+    return this.httpClient.patch(endpoint, data, { ...this.prepareOptions(showLoader), params });
   };
 
-  get = (endpoint: string, params: any = {}): Observable<any> => {
-    return this.httpClient.get(endpoint, { ...this.options, params });
+  delete = (endpoint: string, params: any = {}, showLoader = true): Observable<any> => {
+    return this.httpClient.delete(endpoint, { ...this.prepareOptions(showLoader), params });
+  };
+
+  get = (endpoint: string, params: any = {}, showLoader = true): Observable<any> => {
+    return this.httpClient.get(endpoint, { ...this.prepareOptions(showLoader), params });
   };
 }

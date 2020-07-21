@@ -2,9 +2,9 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { SanConstants } from '@san/shared/interfaces/san-constants';
+import { Constants } from '@san/shared/interfaces/constants';
 
-export const environment: SanConstants = {
+export const environment: Constants = {
   production: false
 };
 

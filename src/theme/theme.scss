@@ -1,6 +1,5 @@
-@import "theme-dark-blue";
+@import 'theme-default';
 
-// theme dependent variables
 $primary: mat-color($theme-primary);
 $accent: mat-color($theme-accent);
 $warn: mat-color($theme-warn);

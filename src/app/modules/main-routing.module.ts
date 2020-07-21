@@ -8,11 +8,12 @@ const routes: Routes = [
     data: { title: 'Traffic' },
     component: SidebarComponent,
     children: []
-  }
+  },
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {}

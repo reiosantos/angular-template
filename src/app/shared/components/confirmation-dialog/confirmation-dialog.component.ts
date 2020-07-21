@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './confirmation-dialog.component.html',
@@ -10,10 +10,7 @@ export class ConfirmModalComponent {
   public displayText = '';
   public confirmText = '';
 
-  constructor(
-    public dialogRef: MatDialogRef<ConfirmModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+  constructor(public dialogRef: MatDialogRef<ConfirmModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.displayText = this.data.displayText;
     this.confirmText = this.data.confirmText;
   }
