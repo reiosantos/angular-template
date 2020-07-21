@@ -1,8 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SanConfig } from '@san/shared/interfaces/san-config';
-import { SanUrls } from '@san/core/providers/san-urls';
+import { Config } from '@san/shared/interfaces/config';
+import { Urls } from '@san/core/providers/urls';
 
 /**
  * @ngdoc service
@@ -14,19 +14,18 @@ import { SanUrls } from '@san/core/providers/san-urls';
 
 @Injectable()
 export class VenueInterceptor implements HttpInterceptor {
-  constructor(private sanConfig: SanConfig) {
-  }
+  constructor(private sanConfig: Config) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const update: any = {};
-    if (req.url.indexOf(SanUrls.getBaseUrl()) === 0) {
+    if (req.url.indexOf(Urls.getBaseUrl()) === 0) {
       // base url holds a placeholder url and we should change it with getCurrentBaseUrl
-      update.url = req.url.replace(SanUrls.getBaseUrl(), SanUrls.getCurrentBaseUrl());
+      update.url = req.url.replace(Urls.getBaseUrl(), Urls.getCurrentBaseUrl());
     }
 
     const reqClone = req.clone(update);
 
-    if (0 === reqClone.url.indexOf(SanUrls.getBaseUrl())) {
+    if (0 === reqClone.url.indexOf(Urls.getBaseUrl())) {
       // It's an API request so we append the 'venue' parameter
       if (reqClone.params.has('forceVenue') && reqClone.params.get('forceVenue')) {
         reqClone.params.set('venue', reqClone.params.get('forceVenue'));

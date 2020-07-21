@@ -1,0 +1,22 @@
+// css
+@import 'styles/variables';
+
+::ng-deep {
+  .loader {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(105, 150, 180, 0.2);
+    cursor: not-allowed;
+
+    .mat-progress-spinner,
+    .mat-spinner {
+      circle {
+        stroke: $green-background;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { SanConfig } from '@san/shared/interfaces/san-config';
-import { MatSelectChange } from '@angular/material';
+import { Config } from '@san/shared/interfaces/config';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'san-language',
@@ -11,16 +11,13 @@ import { MatSelectChange } from '@angular/material';
 })
 export class LanguageComponent implements OnInit {
   selected = '';
-  langs: {val: string, label: string}[] = [];
+  langs: { val: string; label: string }[] = [];
 
-  constructor(
-    private translate: TranslateService,
-    private sanConfig: SanConfig
-  ) {
-  }
+  constructor(private translate: TranslateService, private vcConfig: Config) {}
 
   ngOnInit() {
-    this.langs = this.sanConfig.availableLanguages;
+    this.langs = this.vcConfig.availableLanguages;
+    console.log(this.vcConfig);
     this.selected = this.translate.currentLang;
   }
 

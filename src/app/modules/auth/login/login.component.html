@@ -1,0 +1,60 @@
+
+<san-auth-wrapper>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" fxLayout="column" novalidate>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title translate>Login_Title</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayoutGap="20px" fxLayout="column">
+
+          <mat-form-field appearance="standard" color="accent" fxFlex
+                          [sanErrorControl]="form.get('email')" [sanErrorControlContainer]="emailError">
+            <mat-label translate>Login_Email_Text</mat-label>
+            <input
+              type="email"
+              matInput
+              (change)="validateField('email')"
+              placeholder="Email"
+              formControlName="email"
+              [class.invalid]="!isEmailValid"
+              name="email"
+            />
+            <mat-icon matPrefix>email</mat-icon>
+            <mat-hint align="end" class="mat-small" translate>Login_Email_Hint</mat-hint>
+            <mat-error class="mat-small" translate #emailError></mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" color="accent" fxFlex
+                          [sanErrorControl]="form.get('password')" [sanErrorControlContainer]="passwordError">
+            <mat-label translate>Password_Text</mat-label>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              matInput
+              id="pss-input"
+              (change)="validateField('password')"
+              placeholder="***************"
+              formControlName="password"
+              [class.invalid]="!isPasswordValid"
+              name="password"
+            />
+            <mat-icon matPrefix>lock</mat-icon>
+            <mat-icon matSuffix (click)="togglePasswordView()" class="visibility">
+              {{ showPassword ? 'visibility' : 'visibility_off' }}
+            </mat-icon>
+            <mat-error class="mat-small" translate #passwordError></mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button class="submit-button" [disabled]="form.invalid" type="submit">
+          <san-icon type="fa" icon="sign-in-alt" size="sm" [faIconStyles]="{ color: 'white'}"></san-icon>
+          {{'Login_Submit_Text'|translate}}
+        </button>
+        <div fxFlex></div>
+        <a routerLink="../signup" class="dont-have-account" translate>Dont_Have_Account</a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</san-auth-wrapper>

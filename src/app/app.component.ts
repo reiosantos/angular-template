@@ -1,25 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { SanConfig } from '@san/shared/interfaces/san-config';
-import { SanLogger } from '@san/shared/interfaces/san-logger-publisher';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Config } from '@san/shared/interfaces/config';
+import { Logger } from '@san/shared/interfaces/logger-publisher';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { StoreSelectors, StoreState } from '@san/store';
+import { AuthToken } from '@san/shared/interfaces/auth-token';
+import { Store } from '@ngrx/store';
+import { WINDOW } from '@san/core/providers/injetion-tokens';
 
 @Component({
   selector: 'san-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   private headerTitle: string;
 
   constructor(
-    private vcConfig: SanConfig,
-    private vcLogger: SanLogger,
+    private vcConfig: Config,
+    private vcLogger: Logger,
     private titleService: Title,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
-  }
+    private activatedRoute: ActivatedRoute,
+    private store: Store<StoreState>,
+    private authToken: AuthToken,
+    @Inject(WINDOW) private win: any
+  ) {}
 
   private getHeaderTitleFromRouteData = () => {
     let route = this.activatedRoute.firstChild;
@@ -32,9 +38,9 @@ export class AppComponent implements OnInit {
     }
 
     if (route.outlet === 'primary') {
-      route.data.subscribe((value) => {
+      route.data.subscribe(value => {
         this.headerTitle = value.title;
-        this.titleService.setTitle(`SAN - ${this.headerTitle}`);
+        this.titleService.setTitle(this.headerTitle || 'No Title');
       });
     }
   };
@@ -45,5 +51,21 @@ export class AppComponent implements OnInit {
         this.getHeaderTitleFromRouteData();
       }
     });
+    this.store.select(StoreSelectors.selectAuthUser).subscribe(this.isAuthenticated);
   }
+
+  isAuthenticated = (user: any): any => {
+    const token: any = this.authToken.getTokenData();
+
+    const { routerState } = this.router;
+    const onAuthPage = routerState.snapshot.url.match('auth');
+
+    if (user && user.token && onAuthPage) {
+      return this.win.location.assign('/');
+    }
+
+    if (token && token.username && token.user_id && token.email && onAuthPage) {
+      return this.win.location.assign('/');
+    }
+  };
 }

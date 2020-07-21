@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 const mockMatDialogRef = {
-  close: () => {},
+  close: () => {}
 };
 
 const mockMatDialogData = {
@@ -17,9 +17,7 @@ export class InitSpec {
     describe('', () => {
       beforeEach(() => {
         TestBed.configureTestingModule({
-          declarations: [
-            ...declarations
-          ],
+          declarations: [...declarations],
           providers: [
             { provide: MatDialogRef, useValue: mockMatDialogRef },
             { provide: MAT_DIALOG_DATA, useValue: mockMatDialogData },

@@ -1,10 +1,10 @@
-import { SanConstants } from '@san/shared/interfaces/san-constants';
+import { Constants } from '@san/shared/interfaces/constants';
 
-export const environment: SanConstants = {
+export const environment: Constants = {
   production: false,
-  baseUrl: '/api/',
+  baseUrl: 'https://stg-fenixtest.voyagecontrol.com/api/',
   environment: 'docker',
   sentryDNS: null,
   oauthProviders: { stripe: 'stripe_dev' },
-  forcedUrlComponent: 'angulartemplate',
+  forcedUrlComponent: 'fenixtest'
 };

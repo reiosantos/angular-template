@@ -10,6 +10,20 @@
 }
 
 .submit-button:not([disabled]) {
+  background-color: $green-background !important;
+  color: $green-text !important;
+  fill: $green-text !important;
+
+  svg {
+    color: $green-text !important;
+  }
+}
+
+.mat-form-field-subscript-wrapper {
+  font-size: 100% !important;
+}
+
+.mat-raised-button[disabled] {
+  background-color: var(--primary-lighter-color) !important;
   color: $white !important;
-  background-color: $primary !important;
 }

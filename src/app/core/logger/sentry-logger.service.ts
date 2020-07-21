@@ -17,7 +17,6 @@ export class SentryLoggerService extends ErrorHandler {
   }
 }
 
-
 export function getErrorHandler(): ErrorHandler {
   const noSentryEnvs = ['docker', 'test'];
 

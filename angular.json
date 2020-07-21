@@ -68,7 +68,7 @@
               "sourceMap": true,
               "extractCss": true,
               "namedChunks": true,
-              "aot": true,
+              "aot": false,
               "extractLicenses": false,
               "showCircularDependencies": true,
               "statsJson": false,
@@ -91,7 +91,7 @@
                 {
                   "type": "anyScript",
                   "maximumWarning": "1mb",
-                  "maximumError": "4mb"
+                  "maximumError": "3mb"
                 }
               ]
             },
@@ -135,7 +135,7 @@
             "docker": {
               "browserTarget": "angular-template:build:docker",
               "host": "0.0.0.0",
-              "publicHost": "local.angular-template.com"
+              "publicHost": "local.angulartemplate.com"
             },
             "staging": {
               "browserTarget": "angular-template2:build:staging"

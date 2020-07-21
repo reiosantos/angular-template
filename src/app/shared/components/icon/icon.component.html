@@ -1,0 +1,21 @@
+<fa-icon
+  *ngIf="type==='fa'"
+  [icon]="faIcon"
+  [fixedWidth]="true"
+  [size]="size"
+  [styles]="faIconStyles"
+  aria-hidden="false"
+  [spin]="faSpin">
+</fa-icon>
+
+<mat-icon
+  *ngIf="type==='svg'"
+  class="svg-icon"
+  [svgIcon]="svgIcon"
+  aria-hidden="false"
+  matListIcon>
+</mat-icon>
+
+<a *ngIf="type==='png'" class="button-icon btn-xs">
+  <img class="mat-18" [src]="pngIcon" alt="" aria-hidden="false" />
+</a>

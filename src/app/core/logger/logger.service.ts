@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { LogEntry, LoggingLevel, SanLoggerType } from '@san/shared/interfaces/san-logger-factory';
-import { SanLogger, SanLoggerPublisher } from '@san/shared/interfaces/san-logger-publisher';
+import { LogEntry, LoggingLevel, LoggerType } from '@san/shared/interfaces/logger-factory';
+import { Logger, LoggerPublisher } from '@san/shared/interfaces/logger-publisher';
 
 @Injectable()
-export class LoggerService extends SanLogger {
+export class LoggerService extends Logger {
   level: LoggingLevel = LoggingLevel.ALL;
   logWithDate = true;
 
-  constructor(private sanLoggerPublisher: SanLoggerPublisher) {
+  constructor(private loggerPublisher: LoggerPublisher) {
     super();
   }
 
@@ -33,8 +33,7 @@ export class LoggerService extends SanLogger {
 
   private shouldLog(level: LoggingLevel): boolean {
     let ret = false;
-    if ((level >= this.level && level !== LoggingLevel.OFF) ||
-      this.level === LoggingLevel.ALL) {
+    if ((level >= this.level && level !== LoggingLevel.OFF) || this.level === LoggingLevel.ALL) {
       ret = true;
     }
     return ret;
@@ -47,9 +46,8 @@ export class LoggerService extends SanLogger {
       entry.level = level;
       entry.extraInfo = params;
       entry.logWithDate = this.logWithDate;
-      this.sanLoggerPublisher.publishers.forEach((logger: SanLoggerType) => {
-        logger.log(entry).subscribe(() => {
-        });
+      this.loggerPublisher.publishers.forEach((logger: LoggerType) => {
+        logger.log(entry).subscribe(() => {});
       });
     }
   }

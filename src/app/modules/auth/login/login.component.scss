@@ -1,0 +1,30 @@
+// css
+@import 'styles/variables';
+
+*:not(.mat-error) {
+  color: black;
+}
+
+mat-card {
+  background-color: $white;
+
+  .mat-icon.visibility {
+    cursor: pointer;
+  }
+
+  mat-card-actions {
+    margin: auto 1em;
+
+    .dont-have-account {
+      color: $primary;
+      margin: auto auto auto 1em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .mat-raised-button {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+  }
+}
