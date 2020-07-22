@@ -11,24 +11,24 @@ export class LoggerService extends Logger {
     super();
   }
 
-  debug = (msg: any, ...info: any[]) => {
-    this.writeToLog(msg, LoggingLevel.DEBUG, info);
+  debug = (msg: any, logObject = true, ...info: any[]) => {
+    this.writeToLog(msg, LoggingLevel.DEBUG, logObject, info);
   };
 
-  info = (msg: any, ...info: any[]) => {
-    this.writeToLog(msg, LoggingLevel.INFO, info);
+  info = (msg: any, logObject = true, ...info: any[]) => {
+    this.writeToLog(msg, LoggingLevel.INFO, logObject, info);
   };
 
-  warning = (msg: any, ...info: any[]) => {
-    this.writeToLog(msg, LoggingLevel.WARNING, info);
+  warning = (msg: any, logObject = true, ...info: any[]) => {
+    this.writeToLog(msg, LoggingLevel.WARNING, logObject, info);
   };
 
-  error = (msg: any, ...info: any[]) => {
-    this.writeToLog(msg, LoggingLevel.ERROR, info);
+  error = (msg: any, logObject = true, ...info: any[]) => {
+    this.writeToLog(msg, LoggingLevel.ERROR, logObject, info);
   };
 
-  fatal = (msg: any, ...info: any[]) => {
-    this.writeToLog(msg, LoggingLevel.FATAL, info);
+  fatal = (msg: any, logObject = true, ...info: any[]) => {
+    this.writeToLog(msg, LoggingLevel.FATAL, logObject, info);
   };
 
   private shouldLog(level: LoggingLevel): boolean {
@@ -39,9 +39,10 @@ export class LoggerService extends Logger {
     return ret;
   }
 
-  private writeToLog(msg: any, level: LoggingLevel, params: any[]) {
+  private writeToLog(msg: any, level: LoggingLevel, logObject: boolean, params: any[]) {
     if (this.shouldLog(level)) {
       const entry: LogEntry = new LogEntry();
+      entry.logObject = logObject;
       entry.message = msg;
       entry.level = level;
       entry.extraInfo = params;

@@ -6,6 +6,7 @@ import { environment } from '@san/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthStoreModule } from '@san/store/auth-store/auth-store.module';
 import { LoaderStoreModule } from '@san/store/shared/loader/loader-store.module';
+import { NotificationStoreModule } from '@san/store/shared/notification/notification-store.module';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,8 @@ import { LoaderStoreModule } from '@san/store/shared/loader/loader-store.module'
       logOnly: environment.production
     }),
     AuthStoreModule,
-    LoaderStoreModule
+    LoaderStoreModule,
+    NotificationStoreModule
   ]
 })
 export class SanStoreModule {}
