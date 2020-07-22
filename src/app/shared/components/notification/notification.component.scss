@@ -1,0 +1,22 @@
+
+::ng-deep {
+  .notification {
+    font-weight: bold;
+    &.error {
+      background: #B00020;
+      color: white;
+    }
+    &.warn {
+      background: #c19327;
+      color: white;
+    }
+    &.info {
+      background: #2ea8c7;
+      color: white;
+    }
+    &.success {
+      background: #6cc070;
+      color: white;
+    }
+  }
+}

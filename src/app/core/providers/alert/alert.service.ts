@@ -1,32 +1,36 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
 import { Alert } from '@san/shared/interfaces/alert';
-
-// TODO: Complete the service to show toaster
+import { Store } from '@ngrx/store';
+import { StoreActions, StoreState } from '@san/store';
+import { NotificationTypes } from '@san/store/shared/notification/actions';
 
 @Injectable()
 export class AlertService extends Alert {
-  constructor() {
+  constructor(private store: Store<StoreState>) {
     super();
   }
 
-  success(msg: string, title?: string) {
-    // this.toastr.success(msg, title, this.options);
-  }
+  private dispatchShowAction = (payload: { message: string; type: NotificationTypes; title?: string }) => {
+    this.store.dispatch(new StoreActions.notify.ShowNotification(payload));
+  };
 
-  info(msg: string, title?: string) {
-    // return this.toastr.info(msg, title, this.options);
-  }
+  success = (msg: string, title?: string) => {
+    this.dispatchShowAction({ message: msg, title, type: NotificationTypes.SUCCESS });
+  };
 
-  warning(msg: string, title?: string) {
-    // this.toastr.warning(msg, title, this.options);
-  }
+  info = (msg: string, title?: string) => {
+    this.dispatchShowAction({ message: msg, title, type: NotificationTypes.INFO });
+  };
 
-  error(msg: string, title?: string) {
-    // this.toastr.error(msg, title, this.options);
-  }
+  warning = (msg: string, title?: string) => {
+    this.dispatchShowAction({ message: msg, title, type: NotificationTypes.WARN });
+  };
 
-  clear() {
-    // this.toastr.clear(toastr);
-  }
+  error = (msg: string, title?: string) => {
+    this.dispatchShowAction({ message: msg, title, type: NotificationTypes.ERROR });
+  };
+
+  clear = () => {
+    this.store.dispatch(new StoreActions.notify.HideNotification());
+  };
 }

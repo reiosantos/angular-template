@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToolbarComponent } from '@san/shared/components/toolbar/toolbar.component';
 import { SidebarComponent } from '@san/shared/components/sidebar/sidebar.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SidebarComponent } from '@san/shared/components/sidebar/sidebar.compone
     ErrorControlDirective,
     LoaderComponent,
     ToolbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { SidebarComponent } from '@san/shared/components/sidebar/sidebar.compone
     IconComponent,
     LanguageComponent,
     ErrorControlDirective,
-    LoaderComponent
+    LoaderComponent,
+    NotificationComponent
   ]
 })
 export class SharedModule {}

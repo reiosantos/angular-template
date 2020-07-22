@@ -1,0 +1,11 @@
+<ng-template #templateRef>
+  <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="20%">
+      <san-icon type="fa" size="3x" [icon]="icons[state.type]"></san-icon>
+    </div>
+    <div fxFlex>
+      <h3 *ngIf="state.title" class="mt-0">{{ state.title }}</h3>
+      <h4 class="m-0">{{ state.message }}</h4>
+    </div>
+  </div>
+</ng-template>

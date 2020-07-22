@@ -32,6 +32,7 @@ import { NavMenuService } from '@san/core/providers/nav-menu/nav-menu.service';
 import { SanStoreModule } from '@san/store';
 import { UserService } from '@san/core/services/user/user.service';
 import { UserI } from '@san/shared/interfaces/services/user-i';
+import { NotifyInterceptor } from '@san/core/interceptors/notify-interceptor';
 
 @NgModule({
   declarations: [],
@@ -65,6 +66,7 @@ export class CoreModule {
         { provide: UserI, useClass: UserService },
 
         { provide: APP_INITIALIZER, useFactory: configFactory, deps: [Config], multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: VenueInterceptor, multi: true }

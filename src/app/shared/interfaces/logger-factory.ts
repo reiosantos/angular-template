@@ -16,6 +16,7 @@ export class LogEntry {
   level: LoggingLevel;
   extraInfo: any[];
   logWithDate = true;
+  logObject = true;
 
   buildLogString = (): string => {
     let ret = '';
@@ -51,7 +52,7 @@ export abstract class LoggerType {
   private colors: any = {
     highlight: { 'background-color': 'yellow', color: 'black' },
     debug: 'green',
-    info: 'blue',
+    info: { 'background-color': '#fff', color: 'blue' },
     warning: { 'background-color': 'yellow', color: 'red' },
     error: { 'background-color': 'firebrick', color: 'white' },
     fatal: { 'background-color': '#cc0000', color: '#fff' }
@@ -111,7 +112,11 @@ export class LoggerFactory {
  */
 class LogConsole extends LoggerType {
   log(entry: LogEntry): Observable<boolean> {
-    console.log(`%c${entry.buildLogString()}`, this.getColor(entry.level));
+    if (typeof entry.message === 'object' && entry.logObject) {
+      console.log(entry.message);
+    } else {
+      console.log(`%c${entry.buildLogString()}`, this.getColor(entry.level));
+    }
     return of(true);
   }
 
