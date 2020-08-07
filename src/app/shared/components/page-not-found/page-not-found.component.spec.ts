@@ -33,7 +33,8 @@ describe('PageNotFoundComponent', () => {
 
   it('should contain <p> with more details', () => {
     const p = notFoundPage.querySelector('.details > p');
-    expect(p.textContent).toEqual('The page you`re looking for isn`t here :(');
+    // eslint-disable-next-line
+    expect(p.textContent).toEqual("The page you're looking for isn't here :(");
   });
 
   it('should contain link back to home', () => {

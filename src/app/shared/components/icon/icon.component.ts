@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Styles, Icon, SizeProp } from '@fortawesome/fontawesome-svg-core';
+import { Styles, SizeProp, IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'san-icon',
@@ -13,7 +13,7 @@ export class IconComponent {
   @Input() faIconStyles: Styles = { color: 'white' };
   @Input() faSpin = false;
 
-  get faIcon(): Icon | null {
+  get faIcon(): IconProp | null {
     if (this.type === 'fa') {
       return this.icon;
     }

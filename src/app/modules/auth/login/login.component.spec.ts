@@ -1,16 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
+import { InitSpec } from '@san/init.spec';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginComponent]
-    }).compileComponents();
-  }));
+  InitSpec.configureTestBed();
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);

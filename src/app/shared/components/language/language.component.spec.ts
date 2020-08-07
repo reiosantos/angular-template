@@ -1,16 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LanguageComponent } from './language.component';
+import { InitSpec } from '@san/init.spec';
 
 describe('LanguageComponent', () => {
   let component: LanguageComponent;
   let fixture: ComponentFixture<LanguageComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LanguageComponent]
-    }).compileComponents();
-  }));
+  InitSpec.configureTestBed();
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LanguageComponent);

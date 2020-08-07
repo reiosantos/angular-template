@@ -20,9 +20,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    private sanNavMenu: NavMenu,
-    private store: Store<StoreState>,
-    private storage: Storage,
+    public sanNavMenu: NavMenu,
+    public store: Store<StoreState>,
+    public storage: Storage,
     @Inject(WINDOW) private win: any
   ) {}
 

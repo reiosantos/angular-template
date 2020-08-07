@@ -15,12 +15,14 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private authToken: AuthToken) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const reqClone = req.clone({});
+    let reqClone = req;
 
     const doNotSendTokenToThisUrls = ['/api/jwt/verify/', '/api/jwt/getLoginUrl/'];
 
     if (this.authToken.getToken() && doNotSendTokenToThisUrls.indexOf(reqClone.url) === -1) {
-      reqClone.headers.set('Authorization', `JWT ${this.authToken.getToken()}`);
+      reqClone = reqClone.clone({
+        headers: reqClone.headers.set('Authorization', `JWT ${this.authToken.getToken()}`)
+      });
     }
 
     return next.handle(reqClone);

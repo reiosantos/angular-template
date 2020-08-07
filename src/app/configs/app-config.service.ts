@@ -27,7 +27,7 @@ export class AppConfigService extends Config {
     this.env.urlComponent = this.vcUrlComponent.get();
   }
 
-  private fetchVenueSettings = (): Observable<any> => {
+  public fetchVenueSettings = (): Observable<any> => {
     return this.httpClient.get(`${environment.baseUrl}venue/settings/?venue=${this.env.urlComponent}`).pipe(
       map((settings: [] = []) => {
         return settings.reduce((accumulator: { [key: string]: string }, current: { path?: string; value?: string }) => {
@@ -53,7 +53,7 @@ export class AppConfigService extends Config {
     );
   };
 
-  private fetchTranslations = (): Observable<any> => {
+  public fetchTranslations = (): Observable<any> => {
     return this.httpClient.get(`${environment.baseUrl}terminology/?venue=${this.env.urlComponent}`).pipe(
       map((terminologyResponse: any) => {
         const translations: any = terminologyResponse.translations || {};

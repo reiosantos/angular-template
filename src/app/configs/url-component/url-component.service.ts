@@ -24,10 +24,10 @@ export class UrlComponentService extends UrlComponent {
   private shouldUseSuffix = (): boolean => {
     // Domains from which to check for the venue from last part of URL path
     const DOMAINS = [
-      'dev.angulartemplate.com',
-      'apps.angulartemplate.com',
-      'stg.angulartemplate.com',
-      'int.angulartemplate.com'
+      'dev.voyagecontorl.com',
+      'apps.voyagecontorl.com',
+      'stg.voyagecontorl.com',
+      'int.voyagecontorl.com'
     ];
     return -1 !== DOMAINS.indexOf(this.hostname.toLowerCase());
   };

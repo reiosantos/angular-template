@@ -1,44 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfirmModalComponent } from './confirmation-dialog.component';
 import { EventEmitter } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { InitSpec } from '@san/init.spec';
 
 describe('ConfirmModalComponent', () => {
   let fixture: ComponentFixture<ConfirmModalComponent>;
   let element: HTMLElement;
   let component: ConfirmModalComponent;
 
-  const mockMatDialogRef = {
-    close: () => {}
-  };
-
-  const mockMatDialogData = {
-    data: {
-      displayText: 'display data',
-      confirmText: 'yes'
-    }
-  };
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ConfirmModalComponent],
-      providers: [
-        { provide: MatDialogRef, useValue: mockMatDialogRef },
-        { provide: MAT_DIALOG_DATA, useValue: mockMatDialogData }
-      ]
-    }).compileComponents();
-  }));
+  InitSpec.configureTestBed();
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConfirmModalComponent);
     fixture.detectChanges();
     component = fixture.componentInstance;
+    component.displayText = 'Logout';
     element = fixture.nativeElement;
+    fixture.detectChanges();
   });
 
   describe('initial load', () => {
     it('should have correct message', () => {
-      expect(element.querySelector('p').textContent).toContain('Are you sure you want to ?');
+      expect(element.querySelector('p').textContent).toContain('You are about to Logout.');
     });
   });
 

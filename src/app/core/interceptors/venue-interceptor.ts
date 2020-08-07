@@ -18,10 +18,6 @@ export class VenueInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const update: any = {};
-    if (req.url.indexOf(Urls.getBaseUrl()) === 0) {
-      // base url holds a placeholder url and we should change it with getCurrentBaseUrl
-      update.url = req.url.replace(Urls.getBaseUrl(), Urls.getCurrentBaseUrl());
-    }
 
     const reqClone = req.clone(update);
 
@@ -35,6 +31,11 @@ export class VenueInterceptor implements HttpInterceptor {
       }
     }
 
-    return next.handle(reqClone);
+    if (req.url.indexOf(Urls.getBaseUrl()) === 0) {
+      // base url holds a placeholder url and we should change it with getCurrentBaseUrl
+      update.url = req.url.replace(Urls.getBaseUrl(), Urls.getCurrentBaseUrl());
+    }
+
+    return next.handle(reqClone.clone(update));
   }
 }

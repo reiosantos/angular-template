@@ -1,16 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoaderComponent } from './loader.component';
+import { InitSpec } from '@san/init.spec';
 
 describe('LoaderComponent', () => {
   let component: LoaderComponent;
   let fixture: ComponentFixture<LoaderComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoaderComponent]
-    }).compileComponents();
-  }));
+  InitSpec.configureTestBed();
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoaderComponent);

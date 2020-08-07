@@ -7,6 +7,7 @@ export class StorageService extends Storage {
   constructor(@Inject(LOCAL_STORAGE) private localStorage: StSvc) {
     super();
   }
+
   get = (key: string): string | null => {
     const d = this.localStorage.get(key);
     try {
@@ -15,12 +16,15 @@ export class StorageService extends Storage {
       return d;
     }
   };
-  set = (key: string, value: string): void => {
+
+  set = (key: string, value: any): void => {
     this.localStorage.set(key, value);
   };
+
   delete(key: string): void {
     this.localStorage.remove(key);
   }
+
   clear(): void {
     this.localStorage.clear();
   }

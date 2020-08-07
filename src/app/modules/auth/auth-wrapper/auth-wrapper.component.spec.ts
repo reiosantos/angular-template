@@ -1,16 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthWrapperComponent } from './auth-wrapper.component';
+import { InitSpec } from '@san/init.spec';
 
 describe('AuthWrapperComponent', () => {
   let component: AuthWrapperComponent;
   let fixture: ComponentFixture<AuthWrapperComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AuthWrapperComponent]
-    }).compileComponents();
-  }));
+  InitSpec.configureTestBed();
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AuthWrapperComponent);
