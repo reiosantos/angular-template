@@ -255,3 +255,15 @@ span.too-bar-username {
     padding: 0;
   }
 }
+
+::ng-deep {
+  .mat-menu-panel {
+    background: transparent;
+    min-height: auto !important;
+    .mat-menu-content:not(:empty) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+}

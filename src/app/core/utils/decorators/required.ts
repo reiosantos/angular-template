@@ -1,4 +1,4 @@
-function required(target: Record<string, unknown>, propertyKey: string) {
+function required(target: object, propertyKey: string) {
   Object.defineProperty(target, propertyKey, {
     get(): any {
       throw new Error(`Attribute ${propertyKey} is required`);

@@ -15,10 +15,14 @@
 
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
       <div class="tool-bar-button">
-        <mat-menu class="toolbar-dropdown">
-          <button class="action-button logout" (click)="showLogoutModal()">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <san-icon size="2x" type="fa" icon="chevron-circle-down" [faIconStyles]="{ color: 'gray'}"></san-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="toolbar-dropdown">
+          <button class="action-button logout" mat-menu-item fxLayoutAlign="space-between center"
+                  (click)="showLogoutModal()">
             Logout
-            <span class="right-arrow-icon-wrapper"></span>
+            <san-icon size="1x" type="fa" icon="sign-out-alt" [faIconStyles]="{ color: 'red'}"></san-icon>
           </button>
         </mat-menu>
       </div>

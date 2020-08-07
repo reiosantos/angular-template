@@ -45,6 +45,21 @@ export class AppComponent implements OnInit {
     }
   };
 
+  isAuthenticated = (user: any): any => {
+    const token: any = this.authToken.getTokenData();
+
+    const { routerState } = this.router;
+    const onAuthPage = routerState.snapshot.url.match('auth');
+
+    if (user && user.token && onAuthPage) {
+      return this.router.navigate(['/']);
+    }
+
+    if (token && token.username && token.user_id && token.email && onAuthPage) {
+      return this.router.navigate(['/']);
+    }
+  };
+
   ngOnInit(): void {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
@@ -53,19 +68,4 @@ export class AppComponent implements OnInit {
     });
     this.store.select(StoreSelectors.selectAuthUser).subscribe(this.isAuthenticated);
   }
-
-  isAuthenticated = (user: any): any => {
-    const token: any = this.authToken.getTokenData();
-
-    const { routerState } = this.router;
-    const onAuthPage = routerState.snapshot.url.match('auth');
-
-    if (user && user.token && onAuthPage) {
-      return this.win.location.assign('/');
-    }
-
-    if (token && token.username && token.user_id && token.email && onAuthPage) {
-      return this.win.location.assign('/');
-    }
-  };
 }

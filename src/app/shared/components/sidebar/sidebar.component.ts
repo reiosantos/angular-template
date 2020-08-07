@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { MediaObserver } from '@angular/flex-layout';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as mainRoutes from '@san/routes.json';
@@ -8,6 +8,7 @@ import { ToolbarComponent } from '@san/shared/components/toolbar/toolbar.compone
 import { Config } from '@san/shared/interfaces/config';
 import { NavMenu } from '@san/shared/interfaces/nav-menu';
 import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'san-sidebar',
@@ -16,26 +17,26 @@ import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
 })
 export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
   position: 'over' | 'push' | 'side' = 'side';
-  watcher: Subscription;
+  observer: Subscription;
   activeRoute = '';
   loading = false;
   routes: Route[] = mainRoutes.routes as Route[];
   value = 0;
 
   @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
-  @ViewChild(ToolbarComponent, { static: false }) header: ToolbarComponent;
+  @ViewChild(ToolbarComponent, { static: false }) toolbarComponent: ToolbarComponent;
 
   constructor(
     private config: Config,
     private navMenu: NavMenu,
     private media: MediaObserver,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    public breakpointObserver: BreakpointObserver
   ) {}
 
   responsiveLogout = () => {
-    // TODO: call logout model
-    // Logout modal
+    this.toolbarComponent.showLogoutModal();
   };
 
   ngOnInit() {
@@ -52,15 +53,16 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    if (this.watcher) {
-      this.watcher.unsubscribe();
+    if (this.observer) {
+      this.observer.unsubscribe();
     }
   }
 
   createMediaWatcher = () => {
-    this.watcher = this.media.asObservable().subscribe((changes: MediaChange[]) => {
-      changes.map(change => {
-        if (change.mqAlias === 'sm' || change.mqAlias === 'xs') {
+    this.observer = this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
           this.navMenu.close().then(() => {
             this.position = 'over';
           });
@@ -69,10 +71,8 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
             this.position = 'side';
           });
         }
+        this.cd.detectChanges();
       });
-
-      this.cd.detectChanges();
-    });
   };
 
   menuClicked = (shouldCloseWhenClicked: boolean): Promise<MatDrawerToggleResult> | null => {
@@ -95,7 +95,8 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   };
 
-  funcShowRoute = (section = '', venueSetting = '', permissions: [] = [], onlyIf = ''): boolean => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  funcShowRoute = (section = '', venueSetting = '', permissions: Array<String> = [], onlyIf = ''): boolean => {
     // TODO: check for relevant settings if this route should be displayed to the currently
     //  logged in user
     return false;

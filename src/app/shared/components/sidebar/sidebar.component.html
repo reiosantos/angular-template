@@ -8,7 +8,9 @@
       </mat-toolbar-row>
     </mat-toolbar>
 
-    <mat-accordion>
+    <div class="spacer-tp-5"></div>
+
+    <mat-accordion class="relative">
       <div *ngFor="let item of routes">
         <mat-expansion-panel *ngIf="item.pages.length === 0" class="mat-elevation-z0" hideToggle [id]="item.link">
           <mat-expansion-panel-header>
@@ -74,23 +76,16 @@
 
         </mat-expansion-panel>
       </div>
-
-      <mat-expansion-panel fxHide.gt-xs class="mat-elevation-z0" hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-nav-list>
-              <mat-divider [vertical]="false"></mat-divider>
-              <a mat-list-item (click)="responsiveLogout()">
-                <mat-icon class="logout-icon" matListIcon>logout</mat-icon>
-                Logout
-              </a>
-            </mat-nav-list>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-
     </mat-accordion>
 
+    <a (click)="responsiveLogout()"
+       fxHide.gt-xs
+       fxLayout="row"
+       class="absolute bottom-0 logout"
+       fxLayoutAlign="space-evenly center">
+      <mat-icon class="logout-icon" matListIcon>logout</mat-icon>
+      Logout
+    </a>
   </mat-sidenav>
 
   <mat-sidenav-content>

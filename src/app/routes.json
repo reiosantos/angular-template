@@ -1,10 +1,10 @@
 {
   "routes": [
     {
-      "name": "SIDE_NAVBAR_homepage",
-      "icon": ["fas", "home"],
+      "name": "SIDE_NAVBAR_API_Permissions",
+      "icon": ["fas", "lock"],
       "iconType": "fa",
-      "link": "welcome",
+      "link": "permissions",
       "section": "",
       "permissions": [],
       "venueSetting": "CUSTOM_WELCOME_SCREEN",

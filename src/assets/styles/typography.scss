@@ -67,6 +67,7 @@ body,
     family: 'Lato', 'Material Icons';
     weight: 300; //* Light */
   }
+  outline: none;
 }
 
 body {
@@ -75,4 +76,35 @@ body {
 
 mat-icon {
   font-family: 'Material Icons', sans-serif;
+}
+
+.modal-backdrop {
+  background-color: transparentize(black, .6);
+}
+
+.spacer-tp-1 {
+  margin-top: 1em;
+}
+.spacer-tp-2 {
+  margin-top: 2em;
+}
+.spacer-tp-3 {
+  margin-top: 3em;
+}
+.spacer-tp-4 {
+  margin-top: 4em;
+}
+.spacer-tp-5 {
+  margin-top: 5em;
+}
+
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+
+.bottom-0 {
+  bottom: 0;
 }

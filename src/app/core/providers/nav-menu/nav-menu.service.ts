@@ -29,6 +29,14 @@ export class NavMenuService extends NavMenu {
     return this.sidenav.close();
   }
 
+  public get opened() {
+    return this.sidenav.opened;
+  }
+
+  public get mode() {
+    return this.sidenav.mode;
+  }
+
   public toggle(): void {
     this.sidenav.toggle();
   }

@@ -12,6 +12,10 @@ export abstract class NavMenu {
 
   abstract close(): Promise<MatDrawerToggleResult>;
 
+  abstract get opened(): boolean;
+
+  abstract get mode(): 'over' | 'push' | 'side';
+
   abstract toggle(): void;
 
   abstract addSubscriber(subscriber: PartialObserver<{}>): Subscription;

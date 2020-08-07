@@ -13,7 +13,7 @@ export class LoaderComponent implements OnInit {
   isLoading: Observable<boolean>;
 
   mode: ProgressSpinnerMode = 'indeterminate';
-  strokeWidth = 5;
+  strokeWidth = 2;
 
   constructor(private store: Store<StoreState>) {}
 

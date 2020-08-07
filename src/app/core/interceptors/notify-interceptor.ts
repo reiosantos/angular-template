@@ -44,7 +44,7 @@ export class NotifyInterceptor implements HttpInterceptor {
           type = NotificationTypes.ERROR;
         }
 
-        const payload = { message, title: error.statusText, type };
+        const payload = { message, type };
         if (message) {
           this.store.dispatch(new StoreActions.notify.ShowNotification(payload));
         }

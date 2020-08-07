@@ -1,26 +1,16 @@
 <div class="logout-modal">
-  <div class="modal-header">
-    <button class="close-button display-flex-center" (click)="closeDialog()">
+  <div mat-dialog-title fxLayout="row" fxLayoutAlign="end center">
+    <button class="close-button" (click)="closeDialog()">
       &#x2715;
     </button>
   </div>
-  <div>
-    <p>
+  <div mat-dialog-content>
+    <p fxLayoutAlign="center center">
       You are about to {{displayText}}.
     </p>
-    <div class="action-buttons-wrapper display-flex-center">
-      <button class="action-buttons display-flex-center cancel" (click)="closeDialog()">
-        <span class="arrow-icon-wrapper left-wrapper display-flex-center">
-          <span class="left button-icon-size"></span>
-        </span>
-        Cancel
-      </button>
-      <button mat-dialog-close class="action-buttons display-flex-center confirm" (click)="confirmDialog()">
-        {{confirmText}}
-        <span class="arrow-icon-wrapper right-wrapper display-flex-center">
-          <span class="right button-icon-size"></span>
-        </span>
-      </button>
+    <div fxLayout="row" fxLayoutAlign="space-around end">
+      <button class="action-buttons cancel" (click)="closeDialog()">Cancel</button>
+      <button mat-dialog-close class="action-buttons confirm" (click)="confirmDialog()">{{confirmText}}</button>
     </div>
   </div>
 </div>

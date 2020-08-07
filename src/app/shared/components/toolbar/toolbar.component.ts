@@ -1,10 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '@san/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { Subscription } from 'rxjs';
-import { ComponentType } from '@angular/cdk/portal';
 import { NavMenu } from '@san/shared/interfaces/nav-menu';
 import { User } from '@san/shared/models/user';
+import { Store } from '@ngrx/store';
+import { StoreSelectors, StoreState } from '@san/store';
+import { Storage } from '@san/shared/interfaces/storage';
+import { WINDOW } from '@san/core/providers/injetion-tokens';
 
 @Component({
   selector: 'san-toolbar',
@@ -12,15 +15,19 @@ import { User } from '@san/shared/models/user';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
-  public providerId: number;
-
   user: User = {};
   private logoutModalSub: Subscription;
 
-  constructor(public dialog: MatDialog, private sanNavMenu: NavMenu) {}
+  constructor(
+    public dialog: MatDialog,
+    private sanNavMenu: NavMenu,
+    private store: Store<StoreState>,
+    private storage: Storage,
+    @Inject(WINDOW) private win: any
+  ) {}
 
   ngOnInit() {
-    // TODO: this.user = this.auth.getCurrentUser();
+    this.store.select(StoreSelectors.selectAuthUser).subscribe(user => (this.user = user));
   }
 
   ngOnDestroy(): void {
@@ -34,7 +41,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   };
 
   logout() {
-    // TODO implement logout
+    this.storage.clear();
+    this.win.location.reload();
   }
 
   showLogoutModal = () => {
@@ -45,7 +53,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         backdropClass: 'modal-backdrop',
         panelClass: 'small-modal-panel-class',
         data: {
-          displayText: `logout, ${firstName}`,
+          displayText: `logout, ${firstName || ''}`,
           confirmText: 'logout'
         }
       });
@@ -56,15 +64,4 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       });
     }
   };
-
-  handleAction() {
-    const openModal = (modal: ComponentType<any>) => {
-      this.dialog.open(modal, {
-        minHeight: '568px',
-        width: '592px',
-        panelClass: 'add-cab-modal-panel-class',
-        data: { providerId: this.providerId }
-      });
-    };
-  }
 }
