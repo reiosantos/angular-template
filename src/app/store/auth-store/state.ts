@@ -1,8 +1,8 @@
-import { User } from '@san/shared/models/user';
+import { UserType } from '@san/shared/models/user-type';
 import { getAuthData } from '@san/core/utils';
 
 export interface AuthState {
-  authUser: User | null;
+  authUser: UserType | null;
   authError?: any;
 }
 

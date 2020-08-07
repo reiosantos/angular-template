@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { User } from '@san/shared/models/user';
+import { UserType } from '@san/shared/models/user-type';
 
 export enum AuthActionTypes {
   LOGIN_REQUEST = '[Auth] Login Request',
@@ -31,11 +31,11 @@ export class LoginFailureAction implements Action {
 
 export class LoginSuccessAction implements Action {
   readonly type: string = AuthActionTypes.LOGIN_SUCCESS;
-  private readonly authPayload: { user: User };
-  public get payload(): { user: User } {
+  private readonly authPayload: { user: UserType };
+  public get payload(): { user: UserType } {
     return this.authPayload;
   }
-  constructor(payload: { user: User }) {
+  constructor(payload: { user: UserType }) {
     this.authPayload = payload;
   }
 }

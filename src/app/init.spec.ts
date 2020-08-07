@@ -32,7 +32,7 @@ import { Monitor } from '@san/shared/interfaces/monitor';
 import { MonitoringService } from '@san/core/logger/monitoring.service';
 import { Alert } from '@san/shared/interfaces/alert';
 import { AlertService } from '@san/core/providers/alert/alert.service';
-import { UserI } from '@san/shared/interfaces/services/user-i';
+import { User } from '@san/shared/interfaces/services/user';
 import { UserService } from '@san/core/services/user/user.service';
 import { createTranslateLoader } from '@san/app.module';
 import { SanStoreModule } from '@san/store';
@@ -98,7 +98,7 @@ export class InitSpec {
           { provide: NavMenu, useClass: NavMenuService },
           { provide: Monitor, useClass: MonitoringService },
           { provide: Alert, useClass: AlertService },
-          { provide: UserI, useClass: UserService },
+          { provide: User, useClass: UserService },
 
           { provide: MatDialogRef, useValue: mockMatDialogRef },
           { provide: MAT_DIALOG_DATA, useValue: mockMatDialogData },

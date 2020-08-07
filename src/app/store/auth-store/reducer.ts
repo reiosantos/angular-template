@@ -1,6 +1,6 @@
 import { initialState, AuthState } from '@san/store/auth-store/state';
 import { AuthAction, AuthActionTypes } from '@san/store/auth-store/actions';
-import { User } from '@san/shared/models/user';
+import { UserType } from '@san/shared/models/user-type';
 
 export function authReducer(state = initialState, action: AuthAction): AuthState {
   switch (action.type) {
@@ -20,4 +20,4 @@ export function authReducer(state = initialState, action: AuthAction): AuthState
 }
 
 export const getError = (state: AuthState): any => state.authError;
-export const getUser = (state: AuthState): User => state.authUser;
+export const getUser = (state: AuthState): UserType => state.authUser;

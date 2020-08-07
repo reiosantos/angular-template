@@ -1,5 +1,5 @@
-import { User } from '@san/shared/models/user';
+import { UserType } from '@san/shared/models/user-type';
 
 export abstract class Monitor {
-  abstract monitorUser(user: User): void;
+  abstract monitorUser(user: UserType): void;
 }

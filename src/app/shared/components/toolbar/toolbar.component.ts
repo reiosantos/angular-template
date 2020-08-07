@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '@san/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { Subscription } from 'rxjs';
 import { NavMenu } from '@san/shared/interfaces/nav-menu';
-import { User } from '@san/shared/models/user';
+import { UserType } from '@san/shared/models/user-type';
 import { Store } from '@ngrx/store';
 import { StoreSelectors, StoreState } from '@san/store';
 import { Storage } from '@san/shared/interfaces/storage';
@@ -15,7 +15,7 @@ import { WINDOW } from '@san/core/providers/injetion-tokens';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
-  user: User = {};
+  user: UserType = {};
   private logoutModalSub: Subscription;
 
   constructor(

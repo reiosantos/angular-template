@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import * as Sentry from '@sentry/browser';
 import { Monitor } from '@san/shared/interfaces/monitor';
-import { User } from '@san/shared/models/user';
+import { UserType } from '@san/shared/models/user-type';
 
 @Injectable()
 export class MonitoringService extends Monitor {
-  monitorUser(user: User) {
+  monitorUser(user: UserType) {
     Sentry.configureScope(scope => {
       scope.setUser({
         id: user.id,

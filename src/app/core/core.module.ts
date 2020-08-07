@@ -31,7 +31,7 @@ import { AuthTokenService } from '@san/core/providers/auth-token/auth-token.serv
 import { NavMenuService } from '@san/core/providers/nav-menu/nav-menu.service';
 import { SanStoreModule } from '@san/store';
 import { UserService } from '@san/core/services/user/user.service';
-import { UserI } from '@san/shared/interfaces/services/user-i';
+import { User } from '@san/shared/interfaces/services/user';
 import { NotifyInterceptor } from '@san/core/interceptors/notify-interceptor';
 
 @NgModule({
@@ -63,7 +63,7 @@ export class CoreModule {
         { provide: NavMenu, useClass: NavMenuService },
         { provide: Monitor, useClass: MonitoringService },
         { provide: Alert, useClass: AlertService },
-        { provide: UserI, useClass: UserService },
+        { provide: User, useClass: UserService },
 
         { provide: APP_INITIALIZER, useFactory: configFactory, deps: [Config], multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true },

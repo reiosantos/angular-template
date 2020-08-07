@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@san/shared/interfaces/http-client';
 import { Observable } from 'rxjs';
-import { UserI } from '@san/shared/interfaces/services/user-i';
+import { User } from '@san/shared/interfaces/services/user';
 import { Urls } from '@san/core/providers/urls';
 
 @Injectable()
-export class UserService extends UserI {
+export class UserService extends User {
   constructor(private httpClient: HttpClient) {
     super();
   }

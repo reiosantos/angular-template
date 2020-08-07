@@ -3,7 +3,7 @@ import { MediaObserver } from '@angular/flex-layout';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as mainRoutes from '@san/routes.json';
-import { Route } from '@san/shared/models/route';
+import { RouteType } from '@san/shared/models/route-type';
 import { ToolbarComponent } from '@san/shared/components/toolbar/toolbar.component';
 import { Config } from '@san/shared/interfaces/config';
 import { NavMenu } from '@san/shared/interfaces/nav-menu';
@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
   observer: Subscription;
   activeRoute = '';
   loading = false;
-  routes: Route[] = mainRoutes.routes as Route[];
+  routes: RouteType[] = mainRoutes.routes as RouteType[];
   value = 0;
 
   @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;

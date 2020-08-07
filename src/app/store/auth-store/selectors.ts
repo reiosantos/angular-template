@@ -1,6 +1,6 @@
 import { AuthState } from '@san/store/auth-store/state';
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
-import { User } from '@san/shared/models/user';
+import { UserType } from '@san/shared/models/user-type';
 import { STATE_KEYS } from '@san/store/state-keys';
 import { getError, getUser } from '@san/store/auth-store/reducer';
 
@@ -10,4 +10,4 @@ export const selectAuthState: MemoizedSelector<object, AuthState> = createFeatur
 
 export const selectAuthError: MemoizedSelector<object, any> = createSelector(selectAuthState, getError);
 
-export const selectAuthUser: MemoizedSelector<object, User> = createSelector(selectAuthState, getUser);
+export const selectAuthUser: MemoizedSelector<object, UserType> = createSelector(selectAuthState, getUser);

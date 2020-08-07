@@ -4,7 +4,6 @@
     "outDir": "./out-tsc/app",
     "types": [
       "node",
-      "jest",
       "jwt-decode"
     ]
   },

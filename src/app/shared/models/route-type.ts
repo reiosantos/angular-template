@@ -1,4 +1,4 @@
-export class Route {
+export class RouteType {
   name?: string;
   icon?: any;
   iconType?: 'fa' | 'svg' | 'png';
@@ -9,5 +9,5 @@ export class Route {
   venueSetting?: string;
   show?: string;
   onlyIf?: string;
-  pages?: Route[];
+  pages?: RouteType[];
 }

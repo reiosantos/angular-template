@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
-export abstract class UserI {
+export abstract class User {
   abstract currentUser(): Observable<any>;
 }
