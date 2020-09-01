@@ -47,3 +47,5 @@ Thumbs.db
 fontawesome*
 npm_modules
 *.log
+proxy/
+docker-compose.yml

@@ -10,6 +10,8 @@ import { AppRoutingModule } from '@san/app-routing.module';
 import { PageNotFoundComponent } from '@san/shared/components/page-not-found/page-not-found.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from '@san/shared/shared.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '@san/environment';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -29,7 +31,9 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     CoreModule.forRoot(),
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    // service worker needs to be tested on a prod server(NGINX) is a good choice here.
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [],
