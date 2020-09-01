@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, RouteConfigLoadEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as mainRoutes from '@san/routes.json';
 import { RouteType } from '@san/shared/models/route-type';
@@ -9,6 +9,9 @@ import { Config } from '@san/shared/interfaces/config';
 import { NavMenu } from '@san/shared/interfaces/nav-menu';
 import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { UserType } from '@san/shared/models/user-type';
+import { Strings } from '@san/shared/interfaces/strings';
+import { Storage } from '@san/shared/interfaces/storage';
 
 @Component({
   selector: 'san-sidebar',
@@ -32,6 +35,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     private media: MediaObserver,
     private router: Router,
     private cd: ChangeDetectorRef,
+    private storage: Storage,
     public breakpointObserver: BreakpointObserver
   ) {}
 
@@ -43,6 +47,8 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
         this.activeRoute = event.url;
+      } else if (event instanceof RouteConfigLoadEnd) {
+        this.activeRoute = this.router.url;
       }
     });
   }
@@ -95,17 +101,42 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  funcShowRoute = (section = '', venueSetting = '', permissions: Array<String> = [], onlyIf = ''): boolean => {
-    // TODO: check for relevant settings if this route should be displayed to the currently
-    //  logged in user
-    return false;
+  isRouteVisible = (route: RouteType): boolean => {
+    //TODO: add more filters based on ===> section = '', venueSetting = '', permissions: Array<String> = [], onlyIf
+    // = '', and many others, also to refactor this to a separate service
+
+    if (route.userRole.length > 0 || route.companyRole.length > 0) {
+      // first filter based on user and company roles; means user should poses one of those roles
+      const routeUserRole = route.userRole || [];
+      const routeCompanyRole = route.companyRole || [];
+
+      const user = new UserType(this.storage.get(Strings.USER_KEY));
+      const userRole: string = user.userRole?.toLowerCase();
+      const userCompanyRole: string = user.companyRole?.toLowerCase();
+
+      for (const role of routeUserRole) {
+        if (userRole === role.toLowerCase()) {
+          return true;
+        }
+      }
+      for (const role of routeCompanyRole) {
+        if (userCompanyRole === role.toLowerCase()) {
+          return true;
+        }
+      }
+      return false;
+    }
+    return true;
   };
 
   getIconStyle = (isLinkActive = false): any => {
     if (isLinkActive) {
-      return { color: 'yellow' };
+      return { color: 'yellow', 'font-size': '15px' };
     }
-    return { color: 'white' };
+    return { color: 'white', 'font-size': '15px' };
   };
+
+  isRouteActive(item: RouteType) {
+    return this.activeRoute === item.link;
+  }
 }

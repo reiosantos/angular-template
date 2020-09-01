@@ -4,7 +4,7 @@ import { StoreActions, StoreSelectors, StoreState } from '@san/store';
 import { NotificationState } from '@san/store/shared/notification/state';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { MatSnackBarConfig } from '@angular/material/snack-bar/snack-bar-config';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'san-notification',
@@ -33,7 +33,14 @@ export class NotificationComponent implements OnInit {
   constructor(private store: Store<StoreState>, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.store.select(StoreSelectors.getNotificationState).pipe(debounceTime(500)).subscribe(this.notifyStateChanges);
+    this.store
+      .select(StoreSelectors.getNotificationState)
+      .pipe(
+        debounceTime(500),
+        // filter for only events to show the notifications, disabled ones to hide it, it will auto hide
+        filter(x => x.show)
+      )
+      .subscribe(this.notifyStateChanges);
   }
 
   notifyStateChanges = (state: NotificationState) => {
@@ -44,9 +51,9 @@ export class NotificationComponent implements OnInit {
     }
 
     if (Array.isArray(this.snackOptions.panelClass)) {
-      this.snackOptions.panelClass.push(state.type);
+      this.snackOptions.panelClass = ['notification', state.type];
     } else {
-      this.snackOptions.panelClass += ` ${state.type}`;
+      this.snackOptions.panelClass = `notification ${state.type}`;
     }
 
     if (this.template && this.state.show) {

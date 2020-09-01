@@ -51,12 +51,20 @@ export class AppComponent implements OnInit {
     const { routerState } = this.router;
     const onAuthPage = routerState.snapshot.url.match('auth');
 
-    if (user && user.token && onAuthPage) {
-      return this.router.navigate(['/']);
+    const fn = () => {
+      // can dispatch action to fetch current user info from backend
+      // this.store.dispatch(new StoreActions.user.CurrentUserFetchAction());
+      if (onAuthPage) {
+        this.router.navigate(['/']);
+      }
+    };
+
+    if (user && user.token) {
+      return fn();
     }
 
-    if (token && token.username && token.user_id && token.email && onAuthPage) {
-      return this.router.navigate(['/']);
+    if (token && token.username && token.user_id && token.email) {
+      return fn();
     }
   };
 

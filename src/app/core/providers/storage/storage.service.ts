@@ -8,7 +8,7 @@ export class StorageService extends Storage {
     super();
   }
 
-  get = (key: string): string | null => {
+  get = (key: string): string | null | any => {
     const d = this.localStorage.get(key);
     try {
       return JSON.parse(d);

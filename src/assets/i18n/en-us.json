@@ -1,5 +1,8 @@
 {
   "Application_Name": "Angular Template",
+
+  "SIDE_NAVBAR_Home": "Home",
+
   "Login_Email_Hint": "example: myname@angulartemplate.com",
   "Login_Email_Text": "Email",
   "Login_Title": "Login",

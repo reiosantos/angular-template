@@ -12,3 +12,16 @@ export const getAuthData = (): any => {
     return null;
   }
 };
+
+export const isAuthenticated = (): boolean => {
+  try {
+    const tokenX: string = localStorage.getItem(Strings.TOKEN_KEY);
+    const user = JSON.parse(localStorage.getItem(Strings.AUTH_USER_KEY));
+
+    const token: any = jwtDecode(tokenX);
+    return !!token && !!token.user_id && !!token.email && !!user;
+  } catch (e) {
+    localStorage.clear();
+    return false;
+  }
+};

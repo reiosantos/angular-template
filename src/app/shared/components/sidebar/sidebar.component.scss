@@ -103,12 +103,12 @@ mat-icon {
 
 fa-icon,
 mat-icon {
-  margin: 0 .3em 0 1em;
+  margin: 0 0.3em 0 1em;
 }
 
 san-icon {
   margin-left: 1em;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .vc-top-logo {
@@ -126,6 +126,7 @@ a.logout {
   border-top: 1px solid $white;
   padding: 1em;
   width: 100%;
+
   &:hover {
     cursor: pointer;
   }

@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Config } from '@san/shared/interfaces/config';
 import { Urls } from '@san/core/providers/urls';
+import { Strings } from '@san/shared/interfaces/strings';
+import { UserType } from '@san/shared/models/user-type';
+import { Storage } from '@san/shared/interfaces/storage';
 
 /**
  * @ngdoc service
@@ -14,7 +17,7 @@ import { Urls } from '@san/core/providers/urls';
 
 @Injectable()
 export class VenueInterceptor implements HttpInterceptor {
-  constructor(private sanConfig: Config) {}
+  constructor(private sanConfig: Config, private storage: Storage) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const update: any = {};
@@ -22,13 +25,31 @@ export class VenueInterceptor implements HttpInterceptor {
     const reqClone = req.clone(update);
 
     if (0 === reqClone.url.indexOf(Urls.getBaseUrl())) {
+      let { params } = reqClone;
       // It's an API request so we append the 'venue' parameter
-      if (reqClone.params.has('forceVenue') && reqClone.params.get('forceVenue')) {
-        reqClone.params.set('venue', reqClone.params.get('forceVenue'));
-        reqClone.params.delete('forceVenue');
+      if (params.has('forceVenue') && params.get('forceVenue')) {
+        params = params.set('venue', params.get('forceVenue'));
+        params = params.delete('forceVenue');
       } else {
-        reqClone.params.set('venue', this.sanConfig.env.urlComponent);
+        params = params.set('venue', this.sanConfig.env.urlComponent);
       }
+
+      let user: UserType = this.storage.get(Strings.USER_KEY);
+      if (user) {
+        user = new UserType(user);
+        const company = params.has('company') && params.get('company');
+
+        if (!user.isSuperAdmin) {
+          // all non super users mut send their company
+          params = params.set('company', user.companyId?.toString());
+        } else {
+          if (!company) {
+            // super user but did not supply a company, use the user company
+            params = params.set('company', user.companyId?.toString());
+          }
+        }
+      }
+      update.params = params;
     }
 
     if (req.url.indexOf(Urls.getBaseUrl()) === 0) {

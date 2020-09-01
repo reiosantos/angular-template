@@ -12,19 +12,20 @@
 
     <mat-accordion class="relative">
       <div *ngFor="let item of routes">
-        <mat-expansion-panel *ngIf="item.pages.length === 0" class="mat-elevation-z0" hideToggle [id]="item.link">
+        <mat-expansion-panel *ngIf="item.pages.length === 0 && isRouteVisible(item)" class="mat-elevation-z0" hideToggle [id]="item.link">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <mat-nav-list>
                 <a mat-list-item (click)="menuClicked(true)"
                    [routerLink]="getRouterLink(item.link)"
+                   [class.is-active]="isRouteActive(item)"
                    [routerLinkActive]="['is-active']">
 
                   <san-icon
                     [type]="item.iconType"
                     [icon]="item.icon"
-                    [faSpin]="activeRoute.includes(item.link)"
-                    [faIconStyles]="getIconStyle(activeRoute.includes(item.link))">
+                    [faSpin]="isRouteActive(item)"
+                    [faIconStyles]="getIconStyle(isRouteActive(item))">
                   </san-icon>
 
                   {{item.name|translate}}
@@ -35,7 +36,7 @@
         </mat-expansion-panel>
 
         <!-- use expansion panel for heading item with sub page links -->
-        <mat-expansion-panel *ngIf="item.pages.length > 0" class="mat-elevation-z0" hideToggle [id]="item.link" #expansion>
+        <mat-expansion-panel *ngIf="item.pages.length > 0 && isRouteVisible(item)" class="mat-elevation-z0" hideToggle [id]="item.link" #expansion>
           <mat-expansion-panel-header>
             <mat-icon class="chevron">
               {{ expansion.expanded ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}
@@ -59,18 +60,20 @@
 
           <div class="nav-section">
             <mat-nav-list>
-              <a mat-list-item *ngFor="let navPage of item.pages" [id]="navPage.id" (click)="menuClicked(true)"
-                 [routerLink]="getRouterLink(navPage.link)" [routerLinkActive]="['is-active']">
+              <ng-container *ngFor="let navPage of item.pages">
+                <a mat-list-item *ngIf="isRouteVisible(navPage)" [id]="navPage.id" (click)="menuClicked(true)"
+                   [routerLink]="getRouterLink(navPage.link)" [routerLinkActive]="['is-active']">
 
-                <san-icon
-                  [type]="navPage.iconType"
-                  [icon]="navPage.icon"
-                  [faSpin]="activeRoute.includes(navPage.link)"
-                  [faIconStyles]="getIconStyle(activeRoute.includes(navPage.link))">
-                </san-icon>
+                  <san-icon
+                    [type]="navPage.iconType"
+                    [icon]="navPage.icon"
+                    [faSpin]="isRouteActive(navPage)"
+                    [faIconStyles]="getIconStyle(isRouteActive(navPage))">
+                  </san-icon>
 
-                {{ navPage.name|translate }}
-              </a>
+                  {{ navPage.name|translate }}
+                </a>
+              </ng-container>
             </mat-nav-list>
           </div>
 

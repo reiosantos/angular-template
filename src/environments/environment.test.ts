@@ -5,6 +5,5 @@ export const environment: Constants = {
   baseUrl: '/api/',
   environment: 'test',
   sentryDNS: null,
-  oauthProviders: { stripe: 'stripe_stg' },
-  forcedUrlComponent: 'test'
+  oauthProviders: { stripe: 'stripe_stg' }
 };

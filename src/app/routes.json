@@ -1,15 +1,17 @@
 {
   "routes": [
     {
-      "name": "SIDE_NAVBAR_API_Permissions",
-      "icon": ["fas", "lock"],
+      "name": "SIDE_NAVBAR_Home",
+      "icon": ["fas", "home"],
       "iconType": "fa",
-      "link": "permissions",
+      "link": "/",
       "section": "",
       "permissions": [],
-      "venueSetting": "CUSTOM_WELCOME_SCREEN",
-      "show": "funcShowRoute",
+      "venueSetting": "",
+      "show": "",
       "onlyIf": "",
+      "userRole": [],
+      "companyRole": [],
       "pages": []
     }
   ]

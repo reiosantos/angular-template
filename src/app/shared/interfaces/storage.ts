@@ -1,5 +1,5 @@
 export abstract class Storage {
-  abstract get(key: string): string | null;
+  abstract get(key: string): string | null | any;
 
   abstract set(key: string, value: string): void;
 

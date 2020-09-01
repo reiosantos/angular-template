@@ -25,20 +25,47 @@
             "aot": true,
             "baseHref": "/dashboard/",
             "deployUrl": "/dashboard/",
-            "optimization": true,
+            "optimization": false,
             "outputHashing": "all",
             "sourceMap": false,
             "extractCss": true,
-            "namedChunks": false,
+            "namedChunks": true,
             "extractLicenses": true,
             "vendorChunk": true,
             "buildOptimizer": true,
             "statsJson": true,
             "budgets": [
               {
+                "type": "anyScript",
+                "maximumWarning": "50kb",
+                "maximumError": "70kb"
+              },
+              {
+                "type": "allScript",
+                "maximumWarning": "1m",
+                "maximumError": "2m"
+              },
+              {
                 "type": "initial",
                 "maximumWarning": "2mb",
-                "maximumError": "5mb"
+                "maximumError": "3mb"
+              },
+              {
+                "type": "all",
+                "maximumWarning": "4mb",
+                "maximumError": "8mb"
+              },
+              {
+                "type": "bundle",
+                "name": "main",
+                "maximumWarning": "120kb",
+                "maximumError": "240kb"
+              },
+              {
+                "type": "bundle",
+                "name": "vendor",
+                "maximumWarning": "120kb",
+                "maximumError": "240kb"
               }
             ],
             "assets": [
@@ -81,18 +108,6 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
                 }
-              ],
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyScript",
-                  "maximumWarning": "1mb",
-                  "maximumError": "3mb"
-                }
               ]
             },
             "production": {
@@ -100,18 +115,6 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "3mb",
-                  "maximumError": "6mb"
-                },
-                {
-                  "type": "anyScript",
-                  "maximumWarning": "2mb",
-                  "maximumError": "4mb"
                 }
               ]
             },
@@ -159,6 +162,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.test.ts"
+              }
+            ],
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",

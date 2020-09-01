@@ -90,13 +90,14 @@
       true,
       {"ignoreTypes": ["/[a-z].+]/", "/[a-z]-[a-z]/"], "severity": "error"}
     ],
+    "no-empty-source": null,
     "selector-max-id": 1,
     "no-missing-end-of-source-newline": true,
     "no-eol-whitespace": true,
     "max-line-length": 100,
     "linebreaks": "unix",
     "selector-class-pattern": [
-      "^_?(mat-|cdk-|example-|demo-|ng-|mdc-)|[a-z](\\.)?[a-z]",
+      "^_?(mat-|cdk-|example-|demo-|ng-|mdc-)|[a-z](\\.)?[a-z]*",
       {
         "resolveNestedSelectors": true
       }
@@ -110,7 +111,7 @@
     "at-rule-empty-line-before": [
       "always",
       {
-      "severity": "error",
+        "severity": "error",
         "ignore": ["blockless-after-blockless", "inside-block", "after-comment"]
       }
     ]

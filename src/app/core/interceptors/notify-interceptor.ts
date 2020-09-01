@@ -46,7 +46,9 @@ export class NotifyInterceptor implements HttpInterceptor {
 
         const payload = { message, type };
         if (message) {
-          this.store.dispatch(new StoreActions.notify.ShowNotification(payload));
+          Promise.resolve(null).then(() => {
+            this.store.dispatch(new StoreActions.notify.ShowNotification(payload));
+          });
         }
         return EMPTY;
       })

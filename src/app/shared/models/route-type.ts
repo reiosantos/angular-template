@@ -5,9 +5,11 @@ export class RouteType {
   link?: string;
   id?: string;
   section?: string;
-  permissions?: string[];
+  permissions?: Array<string>;
   venueSetting?: string;
   show?: string;
   onlyIf?: string;
-  pages?: RouteType[];
+  userRole?: Array<string>;
+  companyRole?: Array<string>;
+  pages?: Array<RouteType>;
 }

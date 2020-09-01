@@ -8,7 +8,7 @@ export class MonitoringService extends Monitor {
   monitorUser(user: UserType) {
     Sentry.configureScope(scope => {
       scope.setUser({
-        id: user.id,
+        id: user.id.toString(),
         username: user.name,
         email: user.email
       });

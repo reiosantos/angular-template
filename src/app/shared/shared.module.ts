@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IconComponent } from './components/icon/icon.component';
-import { LanguageComponent } from './components/language/language.component';
-import { ErrorControlDirective } from './directives/error/error-control.directive';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { ConfirmModalComponent } from '@san/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { AppMaterialModule } from '@san/app-material.module';
 import { AppFontIconModule } from '@san/app-font-icon.module';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '@san/shared/components/loader/loader.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToolbarComponent } from '@san/shared/components/toolbar/toolbar.component';
 import { SidebarComponent } from '@san/shared/components/sidebar/sidebar.component';
-import { NotificationComponent } from './components/notification/notification.component';
+import { IconComponent } from '@san/shared/components/icon/icon.component';
+import { ErrorControlDirective } from '@san/shared/directives/error/error-control.directive';
+import { LanguageComponent } from '@san/shared/components/language/language.component';
+import { NotificationComponent } from '@san/shared/components/notification/notification.component';
+import { CopyToClipboardComponent } from '@san/shared/components/copy-to-clipboard/copy-to-clipboard.component';
+import { LayoutComponent } from '@san/shared/components/layout/layout.component';
 
 @NgModule({
   declarations: [
+    LayoutComponent,
     ConfirmModalComponent,
     IconComponent,
     LanguageComponent,
@@ -23,11 +26,13 @@ import { NotificationComponent } from './components/notification/notification.co
     LoaderComponent,
     ToolbarComponent,
     SidebarComponent,
-    NotificationComponent
+    NotificationComponent,
+    CopyToClipboardComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     AppMaterialModule,
     AppFontIconModule,
@@ -36,6 +41,7 @@ import { NotificationComponent } from './components/notification/notification.co
   exports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     AppMaterialModule,
     AppFontIconModule,
@@ -45,7 +51,10 @@ import { NotificationComponent } from './components/notification/notification.co
     LanguageComponent,
     ErrorControlDirective,
     LoaderComponent,
-    NotificationComponent
-  ]
+    NotificationComponent,
+    LayoutComponent,
+    CopyToClipboardComponent
+  ],
+  providers: [TitleCasePipe]
 })
 export class SharedModule {}

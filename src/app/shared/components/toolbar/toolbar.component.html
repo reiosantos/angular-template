@@ -10,19 +10,19 @@
     </button>
 
     <div class="tool-bar-items">
-      <span class="header-title"> Welcome {{ user.firstName }}</span>
+      <span class="header-title"> Welcome, <span class="primary">{{ user?.firstName|titlecase }}</span></span>
     </div>
 
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
       <div class="tool-bar-button">
         <button mat-button [matMenuTriggerFor]="menu">
-          <san-icon size="2x" type="fa" icon="chevron-circle-down" [faIconStyles]="{ color: 'gray'}"></san-icon>
+          <san-icon [faIconStyles]="{ color: 'gray'}" icon="chevron-circle-down" size="2x" type="fa"></san-icon>
         </button>
         <mat-menu #menu="matMenu" class="toolbar-dropdown">
           <button class="action-button logout" mat-menu-item fxLayoutAlign="space-between center"
                   (click)="showLogoutModal()">
             Logout
-            <san-icon size="1x" type="fa" icon="sign-out-alt" [faIconStyles]="{ color: 'red'}"></san-icon>
+            <san-icon [faIconStyles]="{ color: 'red'}" icon="sign-out-alt" size="1x" type="fa"></san-icon>
           </button>
         </mat-menu>
       </div>

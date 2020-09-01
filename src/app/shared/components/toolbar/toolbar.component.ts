@@ -1,7 +1,6 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '@san/shared/components/confirmation-dialog/confirmation-dialog.component';
-import { Subscription } from 'rxjs';
 import { NavMenu } from '@san/shared/interfaces/nav-menu';
 import { UserType } from '@san/shared/models/user-type';
 import { Store } from '@ngrx/store';
@@ -14,9 +13,8 @@ import { WINDOW } from '@san/core/providers/injetion-tokens';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit, OnDestroy {
-  user: UserType = {};
-  private logoutModalSub: Subscription;
+export class ToolbarComponent implements OnInit {
+  user: UserType = new UserType();
 
   constructor(
     public dialog: MatDialog,
@@ -28,12 +26,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.select(StoreSelectors.selectAuthUser).subscribe(user => (this.user = user));
-  }
-
-  ngOnDestroy(): void {
-    if (this.logoutModalSub) {
-      this.logoutModalSub.unsubscribe();
-    }
   }
 
   toggleSideNav = () => {

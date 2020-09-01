@@ -21,6 +21,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -45,7 +51,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    MatTooltipModule,
+    ClipboardModule,
+    ScrollingModule,
+    DragDropModule,
+    MatCheckboxModule
   ],
   exports: [
     MatToolbarModule,
@@ -68,7 +80,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    MatTooltipModule,
+    ClipboardModule,
+    ScrollingModule,
+    DragDropModule,
+    MatCheckboxModule
   ]
 })
 export class AppMaterialModule {}

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "analyze": "webpack-bundle-analyzer dist/angular-template/stats-es5.json",
+    "analyze": "webpack-bundle-analyzer dist/angular-template/stats.json",
     "start": "ng serve --prod",
     "start:docker": "ng serve --configuration=docker",
     "start:staging": "ng serve --configuration=staging",
@@ -90,6 +90,7 @@
     "ts-node": "~8.10.2",
     "tslint": "^6.1.2",
     "typescript": "~3.8.3",
-    "webpack-bundle-analyzer": "^3.8.0"
+    "webpack-bundle-analyzer": "^3.8.0",
+    "puppeteer": "5.2.1"
   }
 }

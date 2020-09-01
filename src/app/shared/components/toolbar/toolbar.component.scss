@@ -35,6 +35,13 @@ button:focus {
   letter-spacing: -1.46px;
   line-height: 38px;
   font-weight: normal;
+
+  .primary {
+    color: $primary;
+    height: inherit;
+    font-family: 'DIN Pro', Helvetica Neue, Helvetica, Arial, serif;
+    font-size: 30px;
+  }
 }
 
 button:hover {
@@ -260,10 +267,10 @@ span.too-bar-username {
   .mat-menu-panel {
     background: transparent;
     min-height: auto !important;
+
     .mat-menu-content:not(:empty) {
       padding-top: 0;
       padding-bottom: 0;
     }
   }
-
 }

@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SidebarComponent } from '@san/shared/components/sidebar/sidebar.component';
+import { LayoutComponent } from '@san/shared/components/layout/layout.component';
+import { AuthGuard } from '@san/core/guards/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     data: { title: 'Traffic' },
-    component: SidebarComponent,
+    component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        pathMatch: 'full'
       }
     ]
   },

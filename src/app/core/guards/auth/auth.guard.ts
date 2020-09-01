@@ -11,27 +11,14 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import jwtDecode from 'jwt-decode';
-import { Strings } from '@san/shared/interfaces/strings';
+import { isAuthenticated } from '@san/core/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanLoad {
   constructor(private router: Router) {}
-
-  isAuthenticated() {
-    try {
-      const tokenX: string = localStorage.getItem(Strings.TOKEN_KEY);
-      const user = JSON.parse(localStorage.getItem(Strings.AUTH_USER_KEY));
-
-      const token: any = jwtDecode(tokenX);
-      return !!token && !!token.user_id && !!token.email && !!user;
-    } catch (e) {
-      localStorage.clear();
-      return false;
-    }
-  }
+  isAuthenticated = isAuthenticated;
 
   canActivate(
     next: ActivatedRouteSnapshot,

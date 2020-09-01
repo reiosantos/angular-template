@@ -7,8 +7,8 @@ if [[ ${ENV} == 'local' ]]; then
     npm run start:docker
 else
     touch /var/run/supervisor.sock
-    mkdir -p /var/www/html/dashboard/
-    cp -R ${APP_PATH}/dist/angular-template/* /var/www/html/dashboard/
+    mkdir -p /usr/share/nginx/html/dashboard/
+    cp -R ${APP_PATH}/dist/angular-template/* /usr/share/nginx/html/dashboard/
     cp ${APP_PATH}/nginx.conf /etc/nginx/conf.d/default.conf
     cp ${APP_PATH}/supervisor.conf /etc/supervisor/conf.d/
     supervisord -n

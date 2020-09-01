@@ -1,0 +1,11 @@
+<button (click)="copyToClipboard = !copyToClipboard"
+        [attr.aria-label]="'Copy to Clipboard'"
+        [attr.aria-pressed]="copyToClipboard"
+        [cdkCopyToClipboard]="value"
+        [matTooltip]="copyToClipboard ? 'Copied' : 'Copy'"
+        mat-icon-button
+        matSuffix
+        matTooltipPosition="above"
+        type="button">
+  <mat-icon>{{copyToClipboard ? 'done' : 'content_copy'}}</mat-icon>
+</button>
