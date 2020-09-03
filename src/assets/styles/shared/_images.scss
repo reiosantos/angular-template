@@ -4,7 +4,7 @@
 //*===== Variables and functions ==============================================*/
 
 //* Directory with the images */
-$images-dir: '#{$prefix}/dashboard/assets/images/';
+$images-dir: '#{$prefix}/assets/images/';
 
 //* Function to easily create a URL of an image */
 @function image-url($path) {
